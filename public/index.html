@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Finder - Customer Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="theme-customer">
+  <div class="desktop-bg-orbs"></div>
+
+  <!-- Laptop layout page wrapper -->
+  <div class="phone-shell">
+    
+    <!-- Desktop Top Sticky Navigation Header -->
+    <div class="phone-nav-bar" id="app-nav-bar" style="display:none;">
+      <div class="nav-item-container">
+        <div class="nav-item active" id="nav-btn-home" onclick="switchTab('home')">
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </div>
+        <div class="nav-item" id="nav-btn-explore" onclick="switchTab('explore')">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Explore</span>
+        </div>
+        <div class="nav-item" id="nav-btn-favorites" onclick="switchTab('favorites')">
+          <i class="fa-solid fa-heart"></i>
+          <span>Favorites</span>
+        </div>
+        <div class="nav-item" id="nav-btn-profile" onclick="switchTab('profile')">
+          <i class="fa-solid fa-user"></i>
+          <span>Profile</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Content Screens -->
+    <div class="phone-screen" id="app-screen">
+      
+      <!-- 1. GATEWAY WELCOME & ROLE SELECTION SCREEN -->
+      <div id="screen-splash" class="screen-view active" style="align-items:center; justify-content:center; text-align:center; height:100%; padding:32px;">
+        <div style="width:100px; height:100px; border-radius:30px; background:var(--primary-blue-glow); display:flex; align-items:center; justify-content:center; margin:0 auto 24px auto;">
+          <i class="fa-solid fa-location-dot" style="font-size:46px; color:var(--primary-blue);"></i>
+        </div>
+        <h1 style="font-size:32px; font-weight:800; margin-bottom:8px; line-height:1.1;">Shop Finder Hub</h1>
+        <p style="color:var(--text-muted); font-size:15px; margin-bottom:32px;">Discover local stores or manage your shop catalog</p>
+        
+        <div class="card-grid" style="grid-template-columns:1fr; gap:16px; width:100%; max-width:360px; margin:0 auto;">
+          <div class="glass-shop-card" style="padding:20px; align-items:center; border-radius:18px; text-align:left;" onclick="goToCustomerAuth()">
+            <i class="fa-solid fa-user" style="font-size:28px; color:var(--primary-blue);"></i>
+            <div style="margin-left:16px;">
+              <strong style="font-size:15px;">Customer Portal</strong>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Find stores, check stock, leave reviews</div>
+            </div>
+          </div>
+          
+          <div class="glass-shop-card" style="padding:20px; align-items:center; border-radius:18px; text-align:left;" onclick="goToOwnerPortal()">
+            <i class="fa-solid fa-store" style="font-size:28px; color:#10b981;"></i>
+            <div style="margin-left:16px;">
+              <strong style="font-size:15px;">Shop Owner Portal</strong>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Manage inventory, timings & campaigns</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. AUTHENTICATION (LOGIN/REGISTER) -->
+      <div id="screen-auth" class="screen-view">
+        <button class="btn-back-header" onclick="showScreen('splash')">
+          <i class="fa-solid fa-arrow-left"></i> Back to Gateway
+        </button>
+
+        <div class="screen-header">
+          <div>
+            <h2 class="screen-title" id="auth-title">Welcome Back 👋</h2>
+            <p class="screen-subtitle" id="auth-subtitle">Login to continue</p>
+          </div>
+        </div>
+
+        <div id="auth-error" style="color:var(--danger-red); font-size:13px; text-align:center; margin-bottom:12px; display:none;"></div>
+
+        <!-- Login Form -->
+        <form id="customer-login-form" onsubmit="handleCustomerLogin(event)">
+          <div class="form-group">
+            <label for="login-mobile">Enter Mobile Number</label>
+            <input type="text" id="login-mobile" class="form-control" required placeholder="e.g. 9876543210">
+          </div>
+          <div class="form-group">
+            <label for="login-pass">Password</label>
+            <input type="password" id="login-pass" class="form-control" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn-block btn-theme" style="margin-top:16px;">Continue</button>
+          
+          <div style="text-align:center; margin-top:20px; font-size:13px; color:var(--text-muted);">
+            Don't have an account? <span style="color:var(--primary-blue); cursor:pointer; font-weight:600;" onclick="toggleAuthMode(false)">Register here</span>
+          </div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="customer-register-form" onsubmit="handleCustomerRegister(event)" style="display:none;">
+          <div class="form-group">
+            <label for="reg-name">Full Name</label>
+            <input type="text" id="reg-name" class="form-control" required placeholder="e.g. Darsh H">
+          </div>
+          <div class="form-group">
+            <label for="reg-mobile">Mobile Number</label>
+            <input type="text" id="reg-mobile" class="form-control" required placeholder="e.g. 9876543210">
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" class="form-control" required placeholder="e.g. darsh@example.com">
+          </div>
+          <div class="form-group">
+            <label for="reg-pass">Password</label>
+            <input type="password" id="reg-pass" class="form-control" required placeholder="••••••••">
+          </div>
+          <div class="form-group">
+            <label for="reg-pass-confirm">Confirm Password</label>
+            <input type="password" id="reg-pass-confirm" class="form-control" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn-block btn-theme" style="margin-top:16px;">Create Account</button>
+          
+          <div style="text-align:center; margin-top:20px; font-size:13px; color:var(--text-muted);">
+            Already have an account? <span style="color:var(--primary-blue); cursor:pointer; font-weight:600;" onclick="toggleAuthMode(true)">Login here</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- 3. CUSTOMER DASHBOARD (HOME TAB) -->
+      <div id="screen-home" class="screen-view">
+        <div class="location-selector" onclick="simulateSelectLocation()">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>
+            <div style="font-size:10px; color:var(--text-muted); font-weight:normal;">Current Location</div>
+            <span id="home-coords-lbl">Koramangala, Bengaluru</span>
+          </div>
+          <i class="fa-solid fa-chevron-down" style="font-size:10px; margin-left:auto;"></i>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar-wrapper">
+          <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
+          <input type="text" class="search-bar-input" placeholder="Search for shops, products..." onclick="switchTab('explore')">
+        </div>
+
+        <!-- Categories Slider Grid -->
+        <div class="categories-slider" id="home-categories-box">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Offer Promotion Banner -->
+        <div class="promo-offer-banner" id="home-promo-banner" style="display:none;" onclick="viewShopWithBanner()">
+          <div class="promo-offer-text">
+            <h3 id="promo-percentage">20% OFF</h3>
+            <p id="promo-title">On all Grocery Items</p>
+            <span style="font-size:10px; color:var(--text-muted); text-transform:uppercase; font-weight:700;" id="promo-shop-name">Fresh Mart</span>
+          </div>
+          <i class="fa-solid fa-tags" style="font-size:42px; color:#ef4444; opacity:0.8;"></i>
+        </div>
+
+        <!-- Shop Listing Section -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <h3 style="font-size:18px; font-weight:700;">Nearby Shops</h3>
+          <span style="font-size:13px; font-weight:600; color:var(--primary-blue); cursor:pointer;" onclick="switchTab('explore')">View All</span>
+        </div>
+
+        <div class="card-grid" id="home-shops-box">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- 4. EXPLORE/SEARCH TAB -->
+      <div id="screen-explore" class="screen-view">
+        <h3 class="screen-title" style="margin-bottom:12px;">Search Products</h3>
+        
+        <div class="search-bar-wrapper" style="margin-bottom:12px;">
+          <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
+          <input type="text" class="search-bar-input" id="explore-search-input" placeholder="What are you looking for?" oninput="handleSearchFilter()">
+        </div>
+
+        <!-- Interactive Filters Row -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+          <div style="display:flex; gap:8px;">
+            <select id="filter-sort" class="status-toggle-select" style="font-size:12px; padding:6px 12px;" onchange="handleSearchFilter()">
+              <option value="none">Sort: Default</option>
+              <option value="low-high">Price: Low → High</option>
+              <option value="high-low">Price: High → Low</option>
+            </select>
+            <select id="filter-avail" class="status-toggle-select" style="font-size:12px; padding:6px 12px;" onchange="handleSearchFilter()">
+              <option value="all">Stock: All</option>
+              <option value="available">In Stock Only</option>
+              <option value="discount">On Discount Only</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card-grid" id="explore-products-box" style="gap:12px;">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- 5. FAVORITES TAB -->
+      <div id="screen-favorites" class="screen-view">
+        <h3 class="screen-title" style="margin-bottom:16px;">Favorite Stores</h3>
+        <div class="card-grid" id="favorites-shops-box">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- 6. USER PROFILE TAB -->
+      <div id="screen-profile" class="screen-view">
+        <div style="background:var(--primary-blue); border-radius:24px; padding:32px; text-align:center; color:white; margin-bottom:24px;">
+          <div style="width:80px; height:80px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin:0 auto 12px auto; font-size:32px; font-weight:800;" id="profile-avatar">
+            D
+          </div>
+          <h3 id="profile-name" style="font-size:22px; font-weight:700;">Darsh H</h3>
+          <p id="profile-email" style="font-size:14px; opacity:0.8; margin-top:2px;">darshh@example.com</p>
+        </div>
+
+        <h3 style="font-size:14px; font-weight:800; color:var(--text-muted); text-transform:uppercase; margin-bottom:12px;">Settings & Activity</h3>
+        <div class="card-grid" style="gap:12px;">
+          <div class="glass-shop-card" style="padding:20px; align-items:center; border-radius:18px;" onclick="openProfileEditModal()">
+            <i class="fa-solid fa-user-pen" style="color:var(--primary-blue); font-size:20px;"></i>
+            <span style="font-weight:600; font-size:15px; margin-left:12px;">Update Profile Details</span>
+            <i class="fa-solid fa-chevron-right" style="margin-left:auto; font-size:12px; color:var(--text-muted);"></i>
+          </div>
+          <div class="glass-shop-card" style="padding:20px; align-items:center; border-radius:18px;" onclick="switchTab('favorites')">
+            <i class="fa-solid fa-heart" style="color:#ef4444; font-size:20px;"></i>
+            <span style="font-weight:600; font-size:15px; margin-left:12px;">Saved Shops Directory</span>
+            <i class="fa-solid fa-chevron-right" style="margin-left:auto; font-size:12px; color:var(--text-muted);"></i>
+          </div>
+          <div class="glass-shop-card" style="padding:20px; align-items:center; border-radius:18px;" onclick="alert('Help line: support@shopfinder.com')">
+            <i class="fa-solid fa-circle-question" style="color:var(--accent-orange); font-size:20px;"></i>
+            <span style="font-weight:600; font-size:15px; margin-left:12px;">Help & Support Center</span>
+            <i class="fa-solid fa-chevron-right" style="margin-left:auto; font-size:12px; color:var(--text-muted);"></i>
+          </div>
+          <div class="glass-shop-card" style="padding:20px; align-items:center; border-radius:18px; color:#ef4444; border-color:rgba(239, 68, 68, 0.15);" onclick="handleCustomerLogout()">
+            <i class="fa-solid fa-right-from-bracket" style="font-size:20px;"></i>
+            <span style="font-weight:700; font-size:15px; margin-left:12px;">Logout Account</span>
+            <i class="fa-solid fa-chevron-right" style="margin-left:auto; font-size:12px;"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. SHOP DETAILS PROFILE -->
+      <div id="screen-shop-detail" class="screen-view" style="padding:0;">
+        <button class="btn-back-header" onclick="closeShopDetails()">
+          <i class="fa-solid fa-arrow-left"></i> Back to Shops Listing
+        </button>
+
+        <div class="shop-hero-banner" id="shop-detail-banner" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600');">
+          <div class="shop-hero-overlay"></div>
+          <div class="back-btn-circle" onclick="closeShopDetails()"><i class="fa-solid fa-arrow-left"></i></div>
+        </div>
+
+        <div class="detail-shop-info">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <h2 class="detail-shop-title" id="shop-detail-name">Fresh Mart</h2>
+            <div id="shop-detail-status-badge" class="card-status-badge open" style="margin-top:8px;">Open</div>
+          </div>
+          
+          <div style="display:flex; align-items:center; gap:8px; font-size:14px; color:var(--text-muted); margin-top:4px;">
+            <span class="shop-card-category" id="shop-detail-category">Grocery</span>
+            <span>•</span>
+            <span id="shop-detail-rating" style="color:var(--accent-orange); font-weight:700;"><i class="fa-solid fa-star"></i> 4.7</span>
+          </div>
+          
+          <div class="detail-actions-row">
+            <div class="action-circle-btn" onclick="callShop()">
+              <i class="fa-solid fa-phone"></i>
+              <span>Call Shop</span>
+            </div>
+            <div class="action-circle-btn" onclick="copyShopNumber()">
+              <i class="fa-solid fa-copy"></i>
+              <span>Copy Number</span>
+            </div>
+            <div class="action-circle-btn" onclick="toggleFavoriteShop()">
+              <i class="fa-solid fa-heart" id="shop-detail-fav-icon"></i>
+              <span>Favorite</span>
+            </div>
+          </div>
+
+          <!-- Active Offer inside Details -->
+          <div class="promo-offer-banner" id="shop-detail-offer-banner" style="margin-bottom:20px; border-color:rgba(239, 68, 68, 0.2); background:rgba(239, 68, 68, 0.05); display:none;">
+            <div class="promo-offer-text">
+              <h3 id="shop-detail-offer-percent" style="font-size:18px;">20% OFF</h3>
+              <p id="shop-detail-offer-title" style="font-size:12px;">Valid till 31 Aug 2026</p>
+            </div>
+            <i class="fa-solid fa-gift" style="color:#ef4444; font-size:32px;"></i>
+          </div>
+
+          <!-- Detail Tabs Nav -->
+          <div class="detail-tabs">
+            <div class="detail-tab-item active" id="detail-tab-products" onclick="switchDetailTab('products')">Products</div>
+            <div class="detail-tab-item" id="detail-tab-about" onclick="switchDetailTab('about')">About</div>
+            <div class="detail-tab-item" id="detail-tab-reviews" onclick="switchDetailTab('reviews')">Reviews</div>
+          </div>
+
+          <!-- TAB CONTENT: PRODUCTS -->
+          <div id="detail-content-products" class="tab-detail-content">
+            <div class="search-bar-wrapper" style="margin-bottom:16px;">
+              <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
+              <input type="text" class="search-bar-input" id="shop-product-search" placeholder="Search products in store..." oninput="filterShopProducts()">
+            </div>
+            <div class="card-grid" id="detail-products-list" style="gap:12px;">
+              <!-- Product rows list populated dynamically -->
+            </div>
+          </div>
+
+          <!-- TAB CONTENT: ABOUT -->
+          <div id="detail-content-about" class="tab-detail-content" style="display:none; line-height:1.6; color:var(--text-muted); font-size:14px; background:var(--bg-card); padding:24px; border-radius:24px; border:1px solid var(--border-color);">
+            <div style="margin-bottom:16px;">
+              <h4 style="color:var(--text-main); margin-bottom:6px; font-size:15px;">Description</h4>
+              <p id="shop-detail-desc"></p>
+            </div>
+            <div style="margin-bottom:16px;">
+              <h4 style="color:var(--text-main); margin-bottom:6px; font-size:15px;">Address</h4>
+              <p id="shop-detail-address"></p>
+            </div>
+            <div style="margin-bottom:16px;">
+              <h4 style="color:var(--text-main); margin-bottom:6px; font-size:15px;">Shop Timings</h4>
+              <p id="shop-detail-timings"></p>
+            </div>
+          </div>
+
+          <!-- TAB CONTENT: REVIEWS -->
+          <div id="detail-content-reviews" class="tab-detail-content" style="display:none;">
+            <!-- Write a review form -->
+            <div class="glass-shop-card" style="padding:20px; flex-direction:column; margin-bottom:20px; border-radius:20px;">
+              <h4 style="font-size:14px; font-weight:800; text-transform:uppercase; color:var(--primary-blue); margin-bottom:12px;">Write a Review</h4>
+              <form id="review-form" onsubmit="submitShopReview(event)">
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label>Select Rating</label>
+                  <div style="display:flex; gap:12px; font-size:24px; color:var(--accent-orange); margin-top:4px;">
+                    <i class="fa-regular fa-star star-rate" onclick="setReviewRating(1)" style="cursor:pointer;"></i>
+                    <i class="fa-regular fa-star star-rate" onclick="setReviewRating(2)" style="cursor:pointer;"></i>
+                    <i class="fa-regular fa-star star-rate" onclick="setReviewRating(3)" style="cursor:pointer;"></i>
+                    <i class="fa-regular fa-star star-rate" onclick="setReviewRating(4)" style="cursor:pointer;"></i>
+                    <i class="fa-regular fa-star star-rate" onclick="setReviewRating(5)" style="cursor:pointer;"></i>
+                  </div>
+                </div>
+                <div class="form-group" style="margin-bottom:12px;">
+                  <textarea id="review-text-input" class="form-control" rows="3" placeholder="Write your review here..." required style="padding:12px; border-radius:12px; font-size:14px;"></textarea>
+                </div>
+                <button type="submit" class="btn-block btn-theme" style="padding:12px; border-radius:12px; font-size:14px;">Submit Review</button>
+              </form>
+            </div>
+
+            <div class="card-grid" id="detail-reviews-list">
+              <!-- Reviews populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- MODAL: PRODUCT DETAILS POPUP -->
+  <div class="modal-overlay" id="product-detail-modal">
+    <div class="modal-card" style="max-width:440px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Product Details</h3>
+        <span class="modal-close-btn" onclick="closeProductDetailModal()">&times;</span>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px; align-items:center; text-align:center;">
+        <img id="prod-detail-modal-img" src="" style="width:100%; height:180px; object-fit:cover; border-radius:18px; background:#1e293b;">
+        
+        <div style="text-align:left; width:100%;">
+          <h4 id="prod-detail-modal-title" style="font-size:20px; font-weight:800; margin-bottom:4px;">Milk</h4>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <span id="prod-detail-modal-category" style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--primary-blue);">Dairy</span>
+            <span id="prod-detail-modal-price" style="font-size:18px; font-weight:800; color:var(--text-main);">₹30.00</span>
+          </div>
+          
+          <!-- Shop Link inside Product Pop-up -->
+          <div class="glass-shop-card" id="prod-detail-shop-link" style="padding:12px; align-items:center; border-radius:14px; margin-bottom:12px; cursor:pointer; border-color:var(--primary-blue-glow);">
+            <i class="fa-solid fa-store" style="color:var(--primary-blue); font-size:16px;"></i>
+            <div style="margin-left:12px;">
+              <div style="font-size:10px; color:var(--text-muted);">Available at Store</div>
+              <strong id="prod-detail-modal-shop-name" style="font-size:13px;">Fresh Mart</strong>
+            </div>
+            <i class="fa-solid fa-chevron-right" style="margin-left:auto; font-size:11px; color:var(--text-muted);"></i>
+          </div>
+
+          <div class="form-group" style="margin-bottom:8px;">
+            <label style="font-size:11px;">Stock Availability</label>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+              <span id="prod-detail-modal-stock-lbl" style="font-weight:700; font-size:14px;">30 Litres</span>
+              <span id="prod-detail-modal-status-badge" class="card-status-badge open">Available</span>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-size:11px;">Description</label>
+            <p id="prod-detail-modal-desc" style="font-size:13px; color:var(--text-muted); line-height:1.4; margin-top:4px;">Product details...</p>
+          </div>
+        </div>
+
+        <button class="btn-block btn-theme" id="prod-detail-modal-buy-btn" style="margin-top:8px;">
+          <i class="fa-solid fa-basket-shopping"></i> Add to Local Basket
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: UPDATE PROFILE -->
+  <div class="modal-overlay" id="profile-edit-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Edit Profile Details</h3>
+        <span class="modal-close-btn" onclick="closeProfileEditModal()">&times;</span>
+      </div>
+      <form id="profile-edit-form" onsubmit="handleSaveProfile(event)">
+        <div class="form-group">
+          <label for="edit-name">Full Name</label>
+          <input type="text" id="edit-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-email">Email</label>
+          <input type="email" id="edit-email" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-mobile">Mobile Number</label>
+          <input type="text" id="edit-mobile" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-pass">New Password (leave empty to keep current)</label>
+          <input type="password" id="edit-pass" class="form-control" placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-block btn-theme" style="margin-top:10px;">Save Profile Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+[
+  {
+    "_id": "84230e650052c419f9c521ac",
+    "product_id": "f3d11e7670b09b8306ac006e",
+    "available_quantity": 30,
+    "unit": "Litre",
+    "last_updated": "2026-08-01T11:21:46.779Z"
+  },
+  {
+    "_id": "4ff920392f4763e8f2f19d5f",
+    "product_id": "7356c76ea3b1d89057253d57",
+    "available_quantity": 5,
+    "unit": "Kg",
+    "last_updated": "2026-08-01T11:21:46.790Z"
+  },
+  {
+    "_id": "f1109504d39a0e6ba3454dfc",
+    "product_id": "4644a21dda39b47840268660",
+    "available_quantity": 12,
+    "unit": "Litre",
+    "last_updated": "2026-08-01T11:21:46.792Z"
+  },
+  {
+    "_id": "181cb03f00115706509da3eb",
+    "product_id": "9a3c3f629c6f1103196d4fa0",
+    "available_quantity": 45,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.798Z"
+  },
+  {
+    "_id": "757b05d0aaeb5df64df3d7bf",
+    "product_id": "79e819c3bcdff01c666f411a",
+    "available_quantity": 4,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.799Z"
+  },
+  {
+    "_id": "5cbe7ac1e0935df195dbf4f1",
+    "product_id": "ff67c222ce759ca6fa6bde53",
+    "available_quantity": 15,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.804Z"
+  },
+  {
+    "_id": "56f3ab42bce4c8ebfd1944e6",
+    "product_id": "d6aaf37f431c2a1367b04a03",
+    "available_quantity": 20,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.808Z"
+  },
+  {
+    "_id": "9ffa0ceb146b82b752be5b97",
+    "product_id": "9f8f457a4717dc47dbdfede6",
+    "available_quantity": 8,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.814Z"
+  },
+  {
+    "_id": "e767c9fc4b7934f95717181a",
+    "product_id": "668b1fd56a021de3278e7712",
+    "available_quantity": 12,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.817Z"
+  },
+  {
+    "_id": "8a5398e5e441cb4a90735067",
+    "product_id": "9567e125ecdb0f42d478c545",
+    "available_quantity": 40,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.822Z"
+  },
+  {
+    "_id": "6d85ba246d0e8a15d72b0fa0",
+    "product_id": "6fda4de662048dcce3d101d5",
+    "available_quantity": 25,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.825Z"
+  },
+  {
+    "_id": "8b39ad6a4de54316f240cc46",
+    "product_id": "aadb5a606b951a638c40170a",
+    "available_quantity": 15,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.830Z"
+  },
+  {
+    "_id": "717277992048fd1ba7629f9c",
+    "product_id": "c7127da8c5cf43154f576919",
+    "available_quantity": 20,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.832Z"
+  },
+  {
+    "_id": "9b89a238869e3f0491bfc077",
+    "product_id": "01d89d5b547ef92c9a62a3ad",
+    "available_quantity": 30,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.836Z"
+  },
+  {
+    "_id": "15f58c1362d97a9dc99c4eef",
+    "product_id": "58ecf8b4ec5219b7188a7476",
+    "available_quantity": 15,
+    "unit": "Packet",
+    "last_updated": "2026-08-01T11:21:46.838Z"
+  },
+  {
+    "_id": "4b3ffe9047c4824a63830af2",
+    "product_id": "8e3e0fac30d5a618e88a62fe",
+    "available_quantity": 50,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.844Z"
+  },
+  {
+    "_id": "4beba16bb5067642d391ccf5",
+    "product_id": "3a6cb6a6fe722bed983a0f92",
+    "available_quantity": 40,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:21:46.846Z"
+  },
+  {
+    "_id": "bebe959096869f311be3990d",
+    "product_id": "f4ee0fcd48238026f071cf06",
+    "available_quantity": 3,
+    "unit": "Kg",
+    "last_updated": "2026-08-01T11:21:46.851Z"
+  },
+  {
+    "_id": "e182d582bb1f9583c7ec4e51",
+    "product_id": "938653f1354dd12ebf47322e",
+    "available_quantity": 15,
+    "unit": "Kg",
+    "last_updated": "2026-08-01T11:21:46.853Z"
+  },
+  {
+    "_id": "e6f75f9fc9bd1b0d00bb97c8",
+    "product_id": "7f237361829539d0bea5b508",
+    "available_quantity": 50,
+    "unit": "Packet",
+    "last_updated": "2026-08-01T11:21:46.858Z"
+  },
+  {
+    "_id": "76aaf9009289dc8765186a2d",
+    "product_id": "b53488c511c2d2ebe427c68a",
+    "available_quantity": 17,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:28:57.800Z"
+  },
+  {
+    "_id": "b63269dd76b7806682d37335",
+    "product_id": "5f5f4ce7db660d6f114ac9b4",
+    "available_quantity": 9,
+    "unit": "Piece",
+    "last_updated": "2026-08-01T11:29:27.853Z"
+  }
+]

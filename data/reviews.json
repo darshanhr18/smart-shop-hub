@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "a53d1ab4a0f6d2879464677a",
+    "shop_id": "02198b5aca063e41aa33a924",
+    "customer_name": "Rohit Sharma",
+    "rating": 5,
+    "review": "Very good shop. All items are available at a reasonable price.",
+    "review_date": "2026-07-30T11:21:46.861Z"
+  },
+  {
+    "_id": "0d1f258d3ec286de0fe4c3db",
+    "shop_id": "02198b5aca063e41aa33a924",
+    "customer_name": "Ananya Reddy",
+    "rating": 4,
+    "review": "Good quality products and friendly staff.",
+    "review_date": "2026-07-27T11:21:46.861Z"
+  },
+  {
+    "_id": "8aa8fba636dda5432e78cede",
+    "shop_id": "02198b5aca063e41aa33a924",
+    "customer_name": "Karthik P",
+    "rating": 5,
+    "review": "My go to place for groceries.",
+    "review_date": "2026-07-25T11:21:46.861Z"
+  }
+]

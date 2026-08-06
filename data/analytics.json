@@ -1,0 +1,284 @@
+[
+  {
+    "_id": "39fe4e2c539120e3b09654fb",
+    "query": "milk",
+    "category": "Dairy",
+    "timestamp": "2026-06-24T15:37:57.102Z"
+  },
+  {
+    "_id": "e07263125e6d5e5471b4272b",
+    "query": "milk",
+    "category": "Dairy",
+    "timestamp": "2026-06-24T15:37:57.103Z"
+  },
+  {
+    "_id": "4988c9c04902493753a34ca5",
+    "query": "milk",
+    "category": "Dairy",
+    "timestamp": "2026-06-24T15:37:57.105Z"
+  },
+  {
+    "_id": "def58ad2c2e441a8dfc07e0f",
+    "query": "milk",
+    "category": "Dairy",
+    "timestamp": "2026-06-24T15:37:57.106Z"
+  },
+  {
+    "_id": "19d85c380173aa31363e0abb",
+    "query": "milk",
+    "category": "Dairy",
+    "timestamp": "2026-06-24T15:37:57.108Z"
+  },
+  {
+    "_id": "4c64849aa60d0b3046e7d640",
+    "query": "milk",
+    "category": "Dairy",
+    "timestamp": "2026-06-24T15:37:57.110Z"
+  },
+  {
+    "_id": "80e51766e2ecbc5c8bac3efa",
+    "query": "fresh milk",
+    "category": "Dairy",
+    "timestamp": "2026-06-24T15:37:57.111Z"
+  },
+  {
+    "_id": "050142909bd4cfae5d8bd629",
+    "query": "fresh milk",
+    "category": "Dairy",
+    "timestamp": "2026-06-24T15:37:57.113Z"
+  },
+  {
+    "_id": "57d01bff3fa10f4b1f87e2d3",
+    "query": "organic milk",
+    "category": "Dairy",
+    "timestamp": "2026-06-24T15:37:57.114Z"
+  },
+  {
+    "_id": "ade01b87eb2879a0402abe75",
+    "query": "organic milk",
+    "category": "Dairy",
+    "timestamp": "2026-06-24T15:37:57.116Z"
+  },
+  {
+    "_id": "4500d99baa7a62694615d231",
+    "query": "apples",
+    "category": "Fruits",
+    "timestamp": "2026-06-24T15:37:57.118Z"
+  },
+  {
+    "_id": "5aecf37d6c2314c2eab200b8",
+    "query": "apples",
+    "category": "Fruits",
+    "timestamp": "2026-06-24T15:37:57.123Z"
+  },
+  {
+    "_id": "3f1ad03b867a55141508415f",
+    "query": "apples",
+    "category": "Fruits",
+    "timestamp": "2026-06-24T15:37:57.124Z"
+  },
+  {
+    "_id": "af2b4f1bd11170b0df3e4be6",
+    "query": "apples",
+    "category": "Fruits",
+    "timestamp": "2026-06-24T15:37:57.126Z"
+  },
+  {
+    "_id": "57ae4a020552d7d38fb5bc39",
+    "query": "red apples",
+    "category": "Fruits",
+    "timestamp": "2026-06-24T15:37:57.128Z"
+  },
+  {
+    "_id": "1b447fbe3bafbb739169d625",
+    "query": "yogurt",
+    "category": "Dairy",
+    "timestamp": "2026-06-24T15:37:57.130Z"
+  },
+  {
+    "_id": "47c002471a780ef6ca4dedd1",
+    "query": "yogurt",
+    "category": "Dairy",
+    "timestamp": "2026-06-24T15:37:57.132Z"
+  },
+  {
+    "_id": "641892a0a4843e1fed097ce9",
+    "query": "bread",
+    "category": "Bakery",
+    "timestamp": "2026-06-24T15:37:57.134Z"
+  },
+  {
+    "_id": "fca04d03e89344ef2900aa26",
+    "query": "bread",
+    "category": "Bakery",
+    "timestamp": "2026-06-24T15:37:57.135Z"
+  },
+  {
+    "_id": "44d18800d9519ee4eae342e3",
+    "query": "vitamin c",
+    "category": "Healthcare",
+    "timestamp": "2026-06-24T15:37:57.137Z"
+  },
+  {
+    "_id": "504f5c94cb05d00f9daedca2",
+    "query": "vitamin c",
+    "category": "Healthcare",
+    "timestamp": "2026-06-24T15:37:57.138Z"
+  },
+  {
+    "_id": "858e58d8b3b8548b417437b1",
+    "query": "vitamin c",
+    "category": "Healthcare",
+    "timestamp": "2026-06-24T15:37:57.140Z"
+  },
+  {
+    "_id": "ebcd1d5660dccf3f17e12a36",
+    "query": "vitamin c",
+    "category": "Healthcare",
+    "timestamp": "2026-06-24T15:37:57.142Z"
+  },
+  {
+    "_id": "f85d16d7e722bdcf0c60de9d",
+    "query": "vitamin",
+    "category": "Healthcare",
+    "timestamp": "2026-06-24T15:37:57.144Z"
+  },
+  {
+    "_id": "9badb636fc610e8ddf8eee3f",
+    "query": "paracetamol",
+    "category": "Healthcare",
+    "timestamp": "2026-06-24T15:37:57.145Z"
+  },
+  {
+    "_id": "9f7b2b69cf5f6c38ed9567bb",
+    "query": "paracetamol",
+    "category": "Healthcare",
+    "timestamp": "2026-06-24T15:37:57.147Z"
+  },
+  {
+    "_id": "a9e00bb7e3a060855bfb14fc",
+    "query": "first aid",
+    "category": "Healthcare",
+    "timestamp": "2026-06-24T15:37:57.150Z"
+  },
+  {
+    "_id": "160aab67bc23dd38e55c9dca",
+    "query": "headphones",
+    "category": "Electronics",
+    "timestamp": "2026-06-24T15:37:57.151Z"
+  },
+  {
+    "_id": "15de1be33cb52e055f79531a",
+    "query": "headphones",
+    "category": "Electronics",
+    "timestamp": "2026-06-24T15:37:57.153Z"
+  },
+  {
+    "_id": "211c8b41b8dc7f9a90ae5bee",
+    "query": "headphones",
+    "category": "Electronics",
+    "timestamp": "2026-06-24T15:37:57.154Z"
+  },
+  {
+    "_id": "615f43f21b158c667d2e578d",
+    "query": "bluetooth",
+    "category": "Electronics",
+    "timestamp": "2026-06-24T15:37:57.156Z"
+  },
+  {
+    "_id": "e7d2005a601031a5bdee0854",
+    "query": "fitness tracker",
+    "category": "Electronics",
+    "timestamp": "2026-06-24T15:37:57.158Z"
+  },
+  {
+    "_id": "6f551229b0fd6e304e44dcb9",
+    "query": "fitness tracker",
+    "category": "Electronics",
+    "timestamp": "2026-06-24T15:37:57.160Z"
+  },
+  {
+    "_id": "9b30d3dd6b55cc187d2cf0e7",
+    "query": "milk",
+    "category": "General",
+    "shopId": null,
+    "timestamp": "2026-06-24T15:39:13.934Z"
+  },
+  {
+    "_id": "d20e1a6cda362378287656ba",
+    "query": "sa",
+    "category": "Dairy",
+    "shopId": null,
+    "timestamp": "2026-06-24T15:51:43.278Z"
+  },
+  {
+    "_id": "26ff7cc6c1f178329d266a6b",
+    "query": "hot",
+    "category": "General",
+    "shopId": null,
+    "timestamp": "2026-06-24T15:52:01.491Z"
+  },
+  {
+    "_id": "803e0c80e402c2c56c844f86",
+    "query": "a",
+    "category": "General",
+    "shopId": null,
+    "timestamp": "2026-06-24T15:52:20.505Z"
+  },
+  {
+    "_id": "a58510d25bdf726e2401fac2",
+    "query": "app",
+    "category": "General",
+    "shopId": null,
+    "timestamp": "2026-06-24T15:52:21.281Z"
+  },
+  {
+    "_id": "8e46975b11cde1ffb9d77ce6",
+    "query": "apple",
+    "category": "General",
+    "shopId": null,
+    "timestamp": "2026-06-24T15:52:22.537Z"
+  },
+  {
+    "_id": "5e8dc9e65b236ac64ee04e00",
+    "query": "appl",
+    "category": "General",
+    "shopId": null,
+    "timestamp": "2026-06-24T15:52:24.207Z"
+  },
+  {
+    "_id": "5338b66d476cf6b0bbafbd7c",
+    "query": "or",
+    "category": "General",
+    "shopId": null,
+    "timestamp": "2026-06-24T15:52:26.970Z"
+  },
+  {
+    "_id": "2997aba1fafd14797450f036",
+    "query": "ora",
+    "category": "General",
+    "shopId": null,
+    "timestamp": "2026-06-24T15:52:28.107Z"
+  },
+  {
+    "_id": "ba3fc74bb6ba5017af4d8205",
+    "query": "oran",
+    "category": "General",
+    "shopId": null,
+    "timestamp": "2026-06-24T15:52:29.069Z"
+  },
+  {
+    "_id": "569c89ca98efc2ddeb2ba69f",
+    "query": "orang",
+    "category": "General",
+    "shopId": null,
+    "timestamp": "2026-06-24T15:52:29.601Z"
+  },
+  {
+    "_id": "4d1d89eb653afb6cab341b7b",
+    "query": "oran",
+    "category": "General",
+    "shopId": null,
+    "timestamp": "2026-06-24T15:52:32.012Z"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "af1a099f97521ff6aee679e2",
+    "title": "Midweek Dairy Flash Sale!",
+    "description": "Get healthy with a flat 20% discount on fresh Greek Style Strawberry Yogurt.",
+    "discountPercent": 20,
+    "productId": "496087c5c89dd7f63a088c10",
+    "shopId": "ea971e9a9172be6d8707957e",
+    "endDate": "2026-06-27T15:37:57.098Z"
+  },
+  {
+    "_id": "dede32d8bb65ccd4650e68f0",
+    "title": "Monsoon Health Boost Deal",
+    "description": "Flat 15% discount on Vitamin C Tablets. Keep your immunity high!",
+    "discountPercent": 15,
+    "productId": "38bb7e73dc67e0d9656e85bf",
+    "shopId": "e75b0e0741b8b41d23946eff",
+    "endDate": "2026-06-29T15:37:57.100Z"
+  }
+]

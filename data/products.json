@@ -1,0 +1,200 @@
+[
+  {
+    "_id": "f3d11e7670b09b8306ac006e",
+    "shop_id": "02198b5aca063e41aa33a924",
+    "product_name": "Milk",
+    "category": "Grocery",
+    "price": 30,
+    "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=200",
+    "description": "Fresh pasteurized whole milk - 1L packet"
+  },
+  {
+    "_id": "7356c76ea3b1d89057253d57",
+    "shop_id": "02198b5aca063e41aa33a924",
+    "product_name": "Rice",
+    "category": "Grocery",
+    "price": 50,
+    "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=200",
+    "description": "Premium Basmati Rice - 1 Kg packet"
+  },
+  {
+    "_id": "4644a21dda39b47840268660",
+    "shop_id": "02198b5aca063e41aa33a924",
+    "product_name": "Sunflower Oil",
+    "category": "Grocery",
+    "price": 160,
+    "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=200",
+    "description": "Pure refined sunflower oil - 1L bottle"
+  },
+  {
+    "_id": "9a3c3f629c6f1103196d4fa0",
+    "shop_id": "16f6d57d689c4c5328dffa5a",
+    "product_name": "Vitamin C Tablets",
+    "category": "Medical",
+    "price": 250,
+    "image": "https://images.unsplash.com/photo-1616671276441-2f4c17600b4a?auto=format&fit=crop&q=80&w=200",
+    "description": "Immunity booster capsules - 60 counts"
+  },
+  {
+    "_id": "79e819c3bcdff01c666f411a",
+    "shop_id": "16f6d57d689c4c5328dffa5a",
+    "product_name": "Emergency First Aid Kit",
+    "category": "Medical",
+    "price": 490,
+    "image": "https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&q=80&w=200",
+    "description": "Compact travel emergency kit"
+  },
+  {
+    "_id": "ff67c222ce759ca6fa6bde53",
+    "shop_id": "7a0107c0ec4ca4425f30bfad",
+    "product_name": "Sourdough Bread",
+    "category": "Bakery",
+    "price": 90,
+    "image": "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&q=80&w=200",
+    "description": "Artisanal crusty sourdough loaf"
+  },
+  {
+    "_id": "d6aaf37f431c2a1367b04a03",
+    "shop_id": "7a0107c0ec4ca4425f30bfad",
+    "product_name": "Chocolate Croissant",
+    "category": "Bakery",
+    "price": 65,
+    "image": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80&w=200",
+    "description": "Flaky puff pastry stuffed with dark chocolate"
+  },
+  {
+    "_id": "9f8f457a4717dc47dbdfede6",
+    "shop_id": "2a114e539ae720ba6b0c8b38",
+    "product_name": "Wireless Headphones",
+    "category": "Electronics",
+    "price": 2999,
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=200",
+    "description": "Active Noise Cancelling Bluetooth headphones"
+  },
+  {
+    "_id": "668b1fd56a021de3278e7712",
+    "shop_id": "2a114e539ae720ba6b0c8b38",
+    "product_name": "Smart Fitness Band",
+    "category": "Electronics",
+    "price": 1999,
+    "image": "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&q=80&w=200",
+    "description": "Daily step tracker with heart rate monitor"
+  },
+  {
+    "_id": "9567e125ecdb0f42d478c545",
+    "shop_id": "8ca0c8e54501d7748467659a",
+    "product_name": "Casual Cotton T-Shirt",
+    "category": "Clothing",
+    "price": 599,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=200",
+    "description": "100% breathable organic cotton tee"
+  },
+  {
+    "_id": "6fda4de662048dcce3d101d5",
+    "shop_id": "8ca0c8e54501d7748467659a",
+    "product_name": "Slim Fit Blue Jeans",
+    "category": "Clothing",
+    "price": 1499,
+    "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&q=80&w=200",
+    "description": "Stretchable indigo blue denim jeans"
+  },
+  {
+    "_id": "aadb5a606b951a638c40170a",
+    "shop_id": "6e6110ec3127a53976b2d4ac",
+    "product_name": "Steel Hammer",
+    "category": "Hardware",
+    "price": 280,
+    "image": "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?auto=format&fit=crop&q=80&w=200",
+    "description": "Heavy duty drop-forged steel claw hammer"
+  },
+  {
+    "_id": "c7127da8c5cf43154f576919",
+    "shop_id": "6e6110ec3127a53976b2d4ac",
+    "product_name": "Screwdriver 6-Piece Set",
+    "category": "Hardware",
+    "price": 450,
+    "image": "https://images.unsplash.com/photo-1530124560672-99988549dec5?auto=format&fit=crop&q=80&w=200",
+    "description": "Multi-bit magnetic screwdriver tool set"
+  },
+  {
+    "_id": "01d89d5b547ef92c9a62a3ad",
+    "shop_id": "13e58a197172104b4a9e0d4d",
+    "product_name": "Leather Cover Journal",
+    "category": "Stationery",
+    "price": 350,
+    "image": "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&q=80&w=200",
+    "description": "A5 lined notebook with vintage leather strap"
+  },
+  {
+    "_id": "58ecf8b4ec5219b7188a7476",
+    "shop_id": "13e58a197172104b4a9e0d4d",
+    "product_name": "Fine Liner Fineline Pens (12 pack)",
+    "category": "Stationery",
+    "price": 290,
+    "image": "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=200",
+    "description": "0.4mm colored fine point sketch markers"
+  },
+  {
+    "_id": "8e3e0fac30d5a618e88a62fe",
+    "shop_id": "e49346d5cec47247ab296211",
+    "product_name": "Double Cheese Chicken Burger",
+    "category": "Restaurants",
+    "price": 220,
+    "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=200",
+    "description": "Grilled chicken patties with cheddar slices & fries"
+  },
+  {
+    "_id": "3a6cb6a6fe722bed983a0f92",
+    "shop_id": "e49346d5cec47247ab296211",
+    "product_name": "Classic Strawberry Milkshake",
+    "category": "Restaurants",
+    "price": 140,
+    "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80&w=200",
+    "description": "Thick fresh strawberry milkshake with whipped cream"
+  },
+  {
+    "_id": "f4ee0fcd48238026f071cf06",
+    "shop_id": "1f39a05a19f1e67c07845975",
+    "product_name": "Crisp Red Apples",
+    "category": "Fruits & Vegetables",
+    "price": 180,
+    "image": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&q=80&w=200",
+    "description": "Sweet organic apples directly from Shimla orchard"
+  },
+  {
+    "_id": "938653f1354dd12ebf47322e",
+    "shop_id": "1f39a05a19f1e67c07845975",
+    "product_name": "Fresh Broccoli",
+    "category": "Fruits & Vegetables",
+    "price": 90,
+    "image": "https://images.unsplash.com/photo-1515671981137-778d067a118a?auto=format&fit=crop&q=80&w=200",
+    "description": "Freshly harvested green broccoli crowns"
+  },
+  {
+    "_id": "7f237361829539d0bea5b508",
+    "shop_id": "0d6824551fd2f1b422e50a32",
+    "product_name": "AA Alkaline Batteries (4 Pack)",
+    "category": "Other",
+    "price": 120,
+    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=200",
+    "description": "Long-lasting daily utility batteries"
+  },
+  {
+    "_id": "b53488c511c2d2ebe427c68a",
+    "shop_id": "8cb054b7dd65363df7c07f0f",
+    "product_name": "IDLI",
+    "category": "FOOD",
+    "price": 30,
+    "image": "",
+    "description": ""
+  },
+  {
+    "_id": "5f5f4ce7db660d6f114ac9b4",
+    "shop_id": "8cb054b7dd65363df7c07f0f",
+    "product_name": "DOSA",
+    "category": "FOOD",
+    "price": 30,
+    "image": "",
+    "description": ""
+  }
+]

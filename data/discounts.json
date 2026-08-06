@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "40ad98536bb1f647db70237d",
+    "shop_id": "02198b5aca063e41aa33a924",
+    "title": "20% OFF On all Grocery Items",
+    "percentage": 20,
+    "description": "Festival Discount Campaign applied to your grocery catalog.",
+    "start_date": "2026-08-01T11:21:46.860Z",
+    "end_date": "2026-08-31T11:21:46.860Z"
+  },
+  {
+    "_id": "42cb3cf13a179f1ddf0c1024",
+    "shop_id": "8cb054b7dd65363df7c07f0f",
+    "title": "WHO WILL COME TODAY THEY 50 PERCENT OFFER",
+    "percentage": 50,
+    "description": "JHFIULER",
+    "start_date": "2026-08-01T11:30:10.896Z",
+    "end_date": null
+  }
+]

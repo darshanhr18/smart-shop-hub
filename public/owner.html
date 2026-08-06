@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Finder - Owner Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="theme-owner">
+  <div class="desktop-bg-orbs"></div>
+
+  <!-- Admin Bypass Floating Console -->
+  <div class="admin-badge" onclick="openAdminConsole()">
+    <i class="fa-solid fa-user-shield"></i> Admin Approval Control
+  </div>
+
+  <!-- Laptop layout page wrapper -->
+  <div class="phone-shell">
+    
+    <!-- Top Sticky Desktop Header -->
+    <div class="phone-nav-bar" id="app-nav-bar" style="display:none;">
+      <div class="nav-item-container">
+        <div class="nav-item active" id="nav-btn-dashboard" onclick="switchDashboardTab('dashboard')">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Dashboard</span>
+        </div>
+        <div class="nav-item" id="nav-btn-stock" onclick="switchDashboardTab('stock')">
+          <i class="fa-solid fa-boxes-stacked"></i>
+          <span>Stock</span>
+        </div>
+        <div class="nav-item" id="nav-btn-offers" onclick="switchDashboardTab('offers')">
+          <i class="fa-solid fa-tags"></i>
+          <span>Offers</span>
+        </div>
+        <div class="nav-item" id="nav-btn-profile" onclick="switchDashboardTab('profile')">
+          <i class="fa-solid fa-gears"></i>
+          <span>Settings</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen Container -->
+    <div class="phone-screen" id="app-screen">
+
+      <!-- 1. AUTH PANEL (LOGIN / REGISTRATION TABS) -->
+      <div id="screen-auth" class="screen-view active">
+        <!-- Return link back to customer gateway selection screen -->
+        <a href="index.html" class="btn-back-header" style="text-decoration:none;">
+          <i class="fa-solid fa-arrow-left"></i> Return to Gateway
+        </a>
+
+        <div class="auth-tabs">
+          <div id="tab-login" class="auth-tab active" onclick="switchAuthTab('login')">Owner Login</div>
+          <div id="tab-register" class="auth-tab" onclick="switchAuthTab('register')">Register Shop</div>
+        </div>
+
+        <div id="auth-error" style="color:var(--danger-red); font-size:13px; text-align:center; margin-bottom:12px; display:none;"></div>
+
+        <!-- Login Form -->
+        <form id="owner-login-form" onsubmit="handleOwnerLogin(event)">
+          <div class="form-group">
+            <label for="login-mobile">Owner Mobile Number</label>
+            <input type="text" id="login-mobile" class="form-control" required placeholder="e.g. 8888888888">
+          </div>
+          <div class="form-group">
+            <label for="login-pass">Password</label>
+            <input type="password" id="login-pass" class="form-control" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn-block btn-theme" style="margin-top:16px;">Log In</button>
+        </form>
+
+        <!-- Registration Form -->
+        <form id="owner-register-form" onsubmit="handleOwnerRegister(event)" style="display:none;">
+          <h4 style="font-size:12px; font-weight:800; color:var(--primary-green); text-transform:uppercase; margin-bottom:12px;">Owner Details</h4>
+          <div class="form-group">
+            <label for="reg-owner-name">Owner Name</label>
+            <input type="text" id="reg-owner-name" class="form-control" required placeholder="e.g. Bob">
+          </div>
+          <div class="form-group">
+            <label for="reg-mobile">Mobile Number</label>
+            <input type="text" id="reg-mobile" class="form-control" required placeholder="e.g. 8888888888">
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" class="form-control" required placeholder="e.g. bob@example.com">
+          </div>
+          <div class="form-group">
+            <label for="reg-pass">Password</label>
+            <input type="password" id="reg-pass" class="form-control" required placeholder="••••••••">
+          </div>
+          <div class="form-group">
+            <label for="reg-pass-confirm">Confirm Password</label>
+            <input type="password" id="reg-pass-confirm" class="form-control" required placeholder="••••••••">
+          </div>
+
+          <h4 style="font-size:12px; font-weight:800; color:var(--primary-green); text-transform:uppercase; margin-top:16px; margin-bottom:12px;">Shop Details</h4>
+          <div class="form-group">
+            <label for="reg-shop-name">Shop Name</label>
+            <input type="text" id="reg-shop-name" class="form-control" required placeholder="e.g. Fresh Mart">
+          </div>
+          <div class="form-group">
+            <label for="reg-category">Shop Category</label>
+            <select id="reg-category" class="status-toggle-select" style="width:100%; padding:12px; border-radius:16px;">
+              <option value="Grocery">Grocery</option>
+              <option value="Medical">Medical</option>
+              <option value="Bakery">Bakery</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Hardware">Hardware</option>
+              <option value="Stationery">Stationery</option>
+              <option value="Restaurants">Restaurants</option>
+              <option value="Fruits & Vegetables">Fruits & Vegetables</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="reg-address">Shop Address</label>
+            <input type="text" id="reg-address" class="form-control" required placeholder="e.g. Koramangala, Bengaluru">
+          </div>
+          
+          <div class="form-group">
+            <label>Shop Photo</label>
+            <div class="image-uploader-box" onclick="triggerFileInput('reg-photo-file')">
+              <input type="file" id="reg-photo-file" style="display:none;" onchange="handleImageUpload(this, 'reg-photo-preview')">
+              <img id="reg-photo-preview" class="image-uploader-preview" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=200" alt="Preview">
+              <div style="font-size:11px; color:var(--text-muted); margin-top:6px;"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Photo</div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-block btn-theme" style="margin-top:16px;">Register Shop</button>
+        </form>
+      </div>
+
+      <!-- 2. OWNER DASHBOARD (HOME TAB) -->
+      <div id="screen-dashboard" class="screen-view">
+        <div class="owner-welcome-bar">
+          <div>
+            <p>Good Morning 👋</p>
+            <h3 id="dash-shop-title">Fresh Mart</h3>
+          </div>
+          <div style="font-size:20px; cursor:pointer;" onclick="alert('Viewing notifications: No new updates.')"><i class="fa-regular fa-bell"></i></div>
+        </div>
+
+        <!-- Business Stats Summary Cards -->
+        <div class="stats-overview-grid">
+          <div class="stat-card-small">
+            <div class="stat-card-val">150</div>
+            <div class="stat-card-label">Visitors Today</div>
+          </div>
+          <div class="stat-card-small">
+            <div class="stat-card-val" id="stat-total-products">0</div>
+            <div class="stat-card-label">Total Products</div>
+          </div>
+          <div class="stat-card-small">
+            <div class="stat-card-val" id="stat-active-offers">0</div>
+            <div class="stat-card-label">Offers Running</div>
+          </div>
+        </div>
+
+        <!-- Shop Status Selector Card -->
+        <div class="status-toggle-container">
+          <span class="status-toggle-label">Shop Status</span>
+          <select id="dash-status-select" class="status-toggle-select" onchange="updateShopStatus()">
+            <option value="Open">Open</option>
+            <option value="Closed">Closed</option>
+            <option value="Busy">Busy</option>
+          </select>
+        </div>
+
+        <!-- Quick Actions Grid -->
+        <div style="font-size:12px; font-weight:800; color:var(--text-muted); text-transform:uppercase; margin-bottom:12px;">Quick Actions</div>
+        <div class="quick-actions-grid">
+          <div class="quick-action-btn" onclick="switchDashboardTab('stock')">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <span>Manage Stock</span>
+          </div>
+          <div class="quick-action-btn" onclick="switchDashboardTab('offers')">
+            <i class="fa-solid fa-tags"></i>
+            <span>Offers</span>
+          </div>
+          <div class="quick-action-btn" onclick="switchDashboardTab('photos')">
+            <i class="fa-solid fa-images"></i>
+            <span>Shop Photos</span>
+          </div>
+          <div class="quick-action-btn" onclick="switchDashboardTab('hours')">
+            <i class="fa-solid fa-clock"></i>
+            <span>Opening Hours</span>
+          </div>
+          <div class="quick-action-btn" onclick="switchDashboardTab('reviews')">
+            <i class="fa-solid fa-star-half-stroke"></i>
+            <span>Reviews</span>
+          </div>
+          <div class="quick-action-btn" onclick="switchDashboardTab('profile')">
+            <i class="fa-solid fa-gears"></i>
+            <span>Settings</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. STOCK MANAGEMENT SCREEN -->
+      <div id="screen-stock" class="screen-view">
+        <button class="btn-back-header" onclick="switchDashboardTab('dashboard')">
+          <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+        </button>
+        
+        <div class="screen-header">
+          <h3 class="screen-title">Manage Stock</h3>
+          <button class="add-product-btn-circle" onclick="openAddProductModal()"><i class="fa-solid fa-plus"></i></button>
+        </div>
+
+        <div class="search-bar-wrapper" style="margin-bottom:14px;">
+          <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
+          <input type="text" class="search-bar-input" id="stock-search-input" placeholder="Search catalog..." oninput="renderStockTable()">
+        </div>
+
+        <div class="card-grid" id="stock-list-container" style="gap:10px;">
+          <!-- Decoupled stock entries list populated dynamically -->
+        </div>
+      </div>
+
+      <!-- 4. DISCOUNT MANAGEMENT SCREEN -->
+      <div id="screen-offers" class="screen-view">
+        <button class="btn-back-header" onclick="switchDashboardTab('dashboard')">
+          <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+        </button>
+
+        <div class="screen-header">
+          <h3 class="screen-title">Offers & Discounts</h3>
+          <button class="add-product-btn-circle" onclick="openAddOfferModal()"><i class="fa-solid fa-plus"></i></button>
+        </div>
+
+        <div class="card-grid" id="offers-list-container">
+          <!-- Discount items lists populated dynamically -->
+        </div>
+      </div>
+
+      <!-- 5. SHOP PHOTOS SCREEN -->
+      <div id="screen-photos" class="screen-view">
+        <button class="btn-back-header" onclick="switchDashboardTab('dashboard')">
+          <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+        </button>
+
+        <h3 class="screen-title" style="margin-bottom:14px;">Shop Photos</h3>
+        
+        <form id="photos-upload-form" onsubmit="handleSavePhotos(event)">
+          <div class="form-group">
+            <label>Front Image</label>
+            <div class="image-uploader-box" onclick="triggerFileInput('front-photo-file')">
+              <input type="file" id="front-photo-file" style="display:none;" onchange="handleImageUpload(this, 'front-photo-preview')">
+              <img id="front-photo-preview" class="image-uploader-preview" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=200" alt="Preview">
+              <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">Upload Shop Front Photo</div>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn-block btn-theme" style="margin-top:20px;">Save Photo Changes</button>
+        </form>
+      </div>
+
+      <!-- 6. OPENING HOURS SCREEN -->
+      <div id="screen-hours" class="screen-view">
+        <button class="btn-back-header" onclick="switchDashboardTab('dashboard')">
+          <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+        </button>
+
+        <h3 class="screen-title" style="margin-bottom:14px;">Opening Hours</h3>
+        
+        <form id="hours-form" onsubmit="handleSaveHours(event)">
+          <div class="form-group" style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-card); padding:12px; border-radius:16px;">
+            <label style="margin-bottom:0;">Shop Operational Status</label>
+            <label class="switch-control">
+              <input type="checkbox" id="hours-status-toggle">
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="hours-open">Opening Time</label>
+            <input type="time" id="hours-open" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="hours-close">Closing Time</label>
+            <input type="time" id="hours-close" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label>Operational Days</label>
+            <div class="weekday-dots-row">
+              <span class="weekday-dot active" onclick="toggleWeekday(this)">M</span>
+              <span class="weekday-dot active" onclick="toggleWeekday(this)">T</span>
+              <span class="weekday-dot active" onclick="toggleWeekday(this)">W</span>
+              <span class="weekday-dot active" onclick="toggleWeekday(this)">T</span>
+              <span class="weekday-dot active" onclick="toggleWeekday(this)">F</span>
+              <span class="weekday-dot active" onclick="toggleWeekday(this)">S</span>
+              <span class="weekday-dot" onclick="toggleWeekday(this)">S</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-block btn-theme" style="margin-top:20px;">Save Hours</button>
+        </form>
+      </div>
+
+      <!-- 7. CUSTOMER REVIEWS VIEW -->
+      <div id="screen-reviews" class="screen-view">
+        <button class="btn-back-header" onclick="switchDashboardTab('dashboard')">
+          <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+        </button>
+
+        <h3 class="screen-title" style="margin-bottom:14px;">Customer Reviews</h3>
+        
+        <div class="card-grid" id="reviews-list-container">
+          <!-- Reviews list populated dynamically -->
+        </div>
+      </div>
+
+      <!-- 8. PROFILE SETTINGS SCREEN -->
+      <div id="screen-profile" class="screen-view">
+        <button class="btn-back-header" onclick="switchDashboardTab('dashboard')">
+          <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+        </button>
+
+        <h3 class="screen-title" style="margin-bottom:14px;">Profile & Shop Settings</h3>
+        
+        <form id="settings-profile-form" onsubmit="handleSaveSettings(event)">
+          <div class="form-group">
+            <label for="set-shop-name">Shop Name</label>
+            <input type="text" id="set-shop-name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="set-shop-desc">Shop Description</label>
+            <textarea id="set-shop-desc" class="form-control" rows="3" placeholder="Description of your shop..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="set-shop-address">Shop Address</label>
+            <input type="text" id="set-shop-address" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="set-shop-contact">Contact Number</label>
+            <input type="text" id="set-shop-contact" class="form-control" required>
+          </div>
+
+          <button type="submit" class="btn-block btn-theme" style="margin-top:14px;">Save Settings</button>
+        </form>
+
+        <button class="btn-block btn-outline" style="margin-top:20px; color:var(--danger-red); border-color:rgba(239,68,68,0.15);" onclick="handleOwnerLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout Account
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- MODAL: ADD/EDIT PRODUCT & STOCK -->
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="product-modal-title">Add New Product</h3>
+        <span class="modal-close-btn" onclick="closeProductModal()">&times;</span>
+      </div>
+      <form id="product-modal-form" onsubmit="handleProductSubmit(event)">
+        <input type="hidden" id="prod-id-input">
+        <div class="form-group">
+          <label for="prod-name">Product Name</label>
+          <input type="text" id="prod-name" class="form-control" required placeholder="e.g. Milk">
+        </div>
+        <div class="form-group">
+          <label for="prod-cat">Category</label>
+          <input type="text" id="prod-cat" class="form-control" required placeholder="e.g. Dairy">
+        </div>
+        <div class="form-group">
+          <label for="prod-price">Price (₹)</label>
+          <input type="number" step="0.01" id="prod-price" class="form-control" required placeholder="0.00">
+        </div>
+        <div class="form-group">
+          <label for="prod-desc">Description (Optional)</label>
+          <input type="text" id="prod-desc" class="form-control" placeholder="Product details...">
+        </div>
+        
+        <div class="form-group">
+          <label>Product Photo</label>
+          <div class="image-uploader-box" onclick="triggerFileInput('prod-photo-file')">
+            <input type="file" id="prod-photo-file" style="display:none;" onchange="handleImageUpload(this, 'prod-photo-preview')">
+            <img id="prod-photo-preview" class="image-uploader-preview" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=200" alt="Preview">
+            <div style="font-size:10px; color:var(--text-muted); margin-top:4px;"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Product Image</div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-block btn-theme">Save Product</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD DISCOUNT OFFER -->
+  <div class="modal-overlay" id="offer-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Create Discount</h3>
+        <span class="modal-close-btn" onclick="closeOfferModal()">&times;</span>
+      </div>
+      <form id="offer-modal-form" onsubmit="handleOfferSubmit(event)">
+        <div class="form-group">
+          <label for="off-title">Discount Title</label>
+          <input type="text" id="off-title" class="form-control" required placeholder="e.g. 20% OFF On Grains">
+        </div>
+        <div class="form-group">
+          <label for="off-percent">Discount Percentage (%)</label>
+          <input type="number" min="1" max="99" id="off-percent" class="form-control" required placeholder="20">
+        </div>
+        <div class="form-group">
+          <label for="off-desc">Description</label>
+          <input type="text" id="off-desc" class="form-control" placeholder="Details of campaign...">
+        </div>
+        
+        <button type="submit" class="btn-block btn-theme">Launch Discount</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADMIN CONTROL PANEL -->
+  <div class="modal-overlay" id="admin-modal">
+    <div class="modal-card" style="max-width:380px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Admin Approval Console</h3>
+        <span class="modal-close-btn" onclick="closeAdminConsole()">&times;</span>
+      </div>
+      <div style="font-size:12px; color:var(--text-muted); margin-bottom:12px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">
+        Bypass owner registration check. Click Approve next to any owner status below.
+      </div>
+      <div class="card-grid" id="admin-pending-list" style="gap:10px; max-height:300px; overflow-y:auto;">
+        <!-- Pending owners list populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- DIALOG: PRODUCT STOCK EDITOR -->
+  <div class="modal-overlay" id="stock-edit-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Update Product Stock</h3>
+        <span class="modal-close-btn" onclick="closeStockEditModal()">&times;</span>
+      </div>
+      <form id="stock-edit-form" onsubmit="handleStockUpdateSubmit(event)">
+        <input type="hidden" id="stock-prod-id">
+        <div class="form-group">
+          <label id="stock-prod-name-lbl" style="font-size:14px; font-weight:800; color:var(--primary-green);">Product</label>
+        </div>
+        
+        <div class="form-group">
+          <label for="stock-qty-input">Available Quantity</label>
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn-outline" style="width:40px; border-radius:10px; font-size:18px; font-weight:800;" onclick="adjustStockVal(-1)">-</button>
+            <input type="number" id="stock-qty-input" class="form-control" style="text-align:center;" required value="0">
+            <button type="button" class="btn-outline" style="width:40px; border-radius:10px; font-size:18px; font-weight:800;" onclick="adjustStockVal(1)">+</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="stock-unit-input">Unit Type</label>
+          <select id="stock-unit-input" class="status-toggle-select" style="width:100%; padding:12px; border-radius:16px;">
+            <option value="Kg">Kg</option>
+            <option value="Litre">Litre</option>
+            <option value="Piece">Piece</option>
+            <option value="Packet">Packet</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-block btn-theme">Save Stock Records</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="owner-app.js"></script>
+</body>
+</html>
