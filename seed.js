@@ -215,6 +215,7 @@ async function seed() {
       address: item.address,
       contact_number: item.contact_number,
       shop_photo: item.shop_photo,
+      shop_photos: item.shop_photos || [],
       opening_time: item.opening_time,
       closing_time: item.closing_time,
       shop_status: item.status

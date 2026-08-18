@@ -1,21 +1,37 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop Finder - Customer Portal</title>
+  <meta name="theme-color" content="#f4f3fb">
+  <meta name="description" content="Shop Vista - Discover local stores, live product stock, emergency essentials, and directions.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Shop Vista | Local Stores & Product Finder</title>
+  <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 <body class="theme-customer">
   <div class="desktop-bg-orbs"></div>
 
-  <!-- Laptop layout page wrapper -->
+  <!-- Standard Desktop App Container -->
   <div class="phone-shell">
     
-    <!-- Desktop Top Sticky Navigation Header -->
+    <!-- Top Sticky Desktop Header Navbar -->
     <div class="phone-nav-bar" id="app-nav-bar" style="display:none;">
+      <div class="app-brand-logo" onclick="switchTab('home')">
+        <i class="fa-solid fa-store" style="color:var(--primary-purple); font-size:22px;"></i>
+        <span class="app-brand-title" style="font-weight:900; background:var(--gradient-brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Shop Vista</span>
+      </div>
+
       <div class="nav-item-container">
+        <button id="pwa-install-btn" class="btn-pwa-install" style="display:none;">
+          <i class="fa-solid fa-download"></i> Install App
+        </button>
+
         <div class="nav-item active" id="nav-btn-home" onclick="switchTab('home')">
           <i class="fa-solid fa-house"></i>
           <span>Home</span>
@@ -23,6 +39,10 @@
         <div class="nav-item" id="nav-btn-explore" onclick="switchTab('explore')">
           <i class="fa-solid fa-magnifying-glass"></i>
           <span>Explore</span>
+        </div>
+        <div class="nav-item" id="nav-btn-emergency" onclick="filterEmergencyItem('')">
+          <i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i>
+          <span>Emergency</span>
         </div>
         <div class="nav-item" id="nav-btn-favorites" onclick="switchTab('favorites')">
           <i class="fa-solid fa-heart"></i>
@@ -35,31 +55,31 @@
       </div>
     </div>
 
-    <!-- Page Content Screens -->
+    <!-- Main App Screen Viewport -->
     <div class="phone-screen" id="app-screen">
       
       <!-- 1. GATEWAY WELCOME & ROLE SELECTION SCREEN -->
       <div id="screen-splash" class="screen-view active" style="align-items:center; justify-content:center; text-align:center; height:100%; padding:32px;">
-        <div style="width:100px; height:100px; border-radius:30px; background:var(--primary-blue-glow); display:flex; align-items:center; justify-content:center; margin:0 auto 24px auto;">
-          <i class="fa-solid fa-location-dot" style="font-size:46px; color:var(--primary-blue);"></i>
+        <div style="width:100px; height:100px; border-radius:30px; background:rgba(124,58,237,0.1); display:flex; align-items:center; justify-content:center; margin:0 auto 24px auto;">
+          <i class="fa-solid fa-store" style="font-size:46px; color:var(--primary-purple);"></i>
         </div>
-        <h1 style="font-size:32px; font-weight:800; margin-bottom:8px; line-height:1.1;">Shop Finder Hub</h1>
-        <p style="color:var(--text-muted); font-size:15px; margin-bottom:32px;">Discover local stores or manage your shop catalog</p>
+        <h1 style="font-size:36px; font-weight:900; margin-bottom:8px; line-height:1.1; background:var(--gradient-brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Shop Vista</h1>
+        <p style="color:var(--text-muted); font-size:15px; margin-bottom:32px;">Discover local shops, live product stock, and emergency essentials</p>
         
-        <div class="card-grid" style="grid-template-columns:1fr; gap:16px; width:100%; max-width:360px; margin:0 auto;">
-          <div class="glass-shop-card" style="padding:20px; align-items:center; border-radius:18px; text-align:left;" onclick="goToCustomerAuth()">
-            <i class="fa-solid fa-user" style="font-size:28px; color:var(--primary-blue);"></i>
+        <div class="card-grid" style="grid-template-columns:1fr; gap:16px; width:100%; max-width:380px; margin:0 auto;">
+          <div class="glass-shop-card" style="padding:20px; align-items:center; border-radius:20px; text-align:left; cursor:pointer;" onclick="enterGuestMode()">
+            <i class="fa-solid fa-store" style="font-size:28px; color:var(--primary-purple);"></i>
             <div style="margin-left:16px;">
-              <strong style="font-size:15px;">Customer Portal</strong>
-              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Find stores, check stock, leave reviews</div>
+              <strong style="font-size:16px; color:var(--text-main);">Customer Portal</strong>
+              <div style="font-size:12px; color:var(--primary-purple); font-weight:600; margin-top:2px;">Browse stores & stock (No login needed)</div>
             </div>
           </div>
           
-          <div class="glass-shop-card" style="padding:20px; align-items:center; border-radius:18px; text-align:left;" onclick="goToOwnerPortal()">
-            <i class="fa-solid fa-store" style="font-size:28px; color:#10b981;"></i>
+          <div class="glass-shop-card" style="padding:20px; align-items:center; border-radius:20px; text-align:left; cursor:pointer;" onclick="goToOwnerPortal()">
+            <i class="fa-solid fa-user-gear" style="font-size:28px; color:var(--primary-teal);"></i>
             <div style="margin-left:16px;">
-              <strong style="font-size:15px;">Shop Owner Portal</strong>
-              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Manage inventory, timings & campaigns</div>
+              <strong style="font-size:16px; color:var(--text-main);">Shop Owner Portal</strong>
+              <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Manage catalog, status & emergency stock</div>
             </div>
           </div>
         </div>
@@ -93,7 +113,7 @@
           <button type="submit" class="btn-block btn-theme" style="margin-top:16px;">Continue</button>
           
           <div style="text-align:center; margin-top:20px; font-size:13px; color:var(--text-muted);">
-            Don't have an account? <span style="color:var(--primary-blue); cursor:pointer; font-weight:600;" onclick="toggleAuthMode(false)">Register here</span>
+            Don't have an account? <span style="color:var(--primary-purple); cursor:pointer; font-weight:600;" onclick="toggleAuthMode(false)">Register here</span>
           </div>
         </form>
 
@@ -122,31 +142,80 @@
           <button type="submit" class="btn-block btn-theme" style="margin-top:16px;">Create Account</button>
           
           <div style="text-align:center; margin-top:20px; font-size:13px; color:var(--text-muted);">
-            Already have an account? <span style="color:var(--primary-blue); cursor:pointer; font-weight:600;" onclick="toggleAuthMode(true)">Login here</span>
+            Already have an account? <span style="color:var(--primary-purple); cursor:pointer; font-weight:600;" onclick="toggleAuthMode(true)">Login here</span>
           </div>
         </form>
+
+        <div style="text-align:center; margin-top:24px; padding-top:16px; border-top:1px dashed var(--border-color);">
+          <button type="button" class="btn-block" style="background:transparent; border:1px solid var(--primary-purple); color:var(--primary-purple); font-weight:700;" onclick="enterGuestMode()">
+            ⚡ Continue as Guest (Browse Shops)
+          </button>
+        </div>
       </div>
 
       <!-- 3. CUSTOMER DASHBOARD (HOME TAB) -->
       <div id="screen-home" class="screen-view">
-        <div class="location-selector" onclick="simulateSelectLocation()">
-          <i class="fa-solid fa-location-dot"></i>
+        <!-- Top App Bar with Shop Vista Branding & Actions -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
           <div>
-            <div style="font-size:10px; color:var(--text-muted); font-weight:normal;">Current Location</div>
-            <span id="home-coords-lbl">Koramangala, Bengaluru</span>
+            <h1 style="font-size:24px; font-weight:900; margin:0; background:var(--gradient-brand); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Shop Vista</h1>
+            <div class="location-selector" onclick="simulateSelectLocation()" style="margin:4px 0 0 0;">
+              <i class="fa-solid fa-location-dot" style="color:var(--primary-purple);"></i>
+              <span id="home-coords-lbl" style="font-weight:700; color:var(--text-main); font-size:13px;">Sindhanur</span>
+              <i class="fa-solid fa-chevron-down" style="font-size:10px; margin-left:4px; color:var(--text-muted);"></i>
+            </div>
           </div>
-          <i class="fa-solid fa-chevron-down" style="font-size:10px; margin-left:auto;"></i>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <button class="shop-round-btn" style="width:42px; height:42px; font-size:16px; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2);" onclick="filterEmergencyItem('')" aria-label="Emergency Essentials" title="Emergency Essentials">
+              <i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i>
+            </button>
+            <button class="shop-round-btn" style="width:42px; height:42px; font-size:16px;" onclick="alert('No new notifications')" aria-label="Notifications">
+              <i class="fa-solid fa-bell" style="color:var(--primary-purple);"></i>
+            </button>
+            <button class="shop-round-btn" style="width:42px; height:42px; font-size:16px;" onclick="switchTab('profile')" aria-label="Profile">
+              <i class="fa-solid fa-user" style="color:var(--primary-purple);"></i>
+            </button>
+          </div>
         </div>
 
         <!-- Search Bar -->
         <div class="search-bar-wrapper">
-          <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
-          <input type="text" class="search-bar-input" placeholder="Search for shops, products..." onclick="switchTab('explore')">
+          <i class="fa-solid fa-magnifying-glass search-bar-icon" style="color:var(--primary-purple);"></i>
+          <input type="text" class="search-bar-input" placeholder="🔍 Search shops or products..." onclick="switchTab('explore')">
         </div>
 
         <!-- Categories Slider Grid -->
-        <div class="categories-slider" id="home-categories-box">
-          <!-- Populated dynamically -->
+        <div style="margin-bottom:12px;">
+          <h3 style="font-size:16px; font-weight:800; margin-bottom:10px; color:var(--text-main);">Categories</h3>
+          <div class="categories-slider" id="home-categories-box">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- 🚨 Emergency Essentials Section -->
+        <div class="emergency-section" id="home-emergency-box">
+          <div class="emergency-header">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size:20px; color:#ef4444;"></i>
+            <h3 class="emergency-title">🚨 Emergency Essentials</h3>
+          </div>
+          <div class="emergency-grid">
+            <div class="emergency-item-chip" onclick="filterEmergencyItem('Medicines')">
+              <span class="emergency-item-name">💊 Medicines</span>
+              <span class="card-status-badge open">🟢 Available</span>
+            </div>
+            <div class="emergency-item-chip" onclick="filterEmergencyItem('Baby Products')">
+              <span class="emergency-item-name">🍼 Baby Products</span>
+              <span class="card-status-badge open">🟢 Available</span>
+            </div>
+            <div class="emergency-item-chip" onclick="filterEmergencyItem('Water')">
+              <span class="emergency-item-name">💧 Water</span>
+              <span class="card-status-badge open">🟢 Available</span>
+            </div>
+            <div class="emergency-item-chip" onclick="filterEmergencyItem('Rice')">
+              <span class="emergency-item-name">🍚 Rice</span>
+              <span class="card-status-badge limited">🟡 Limited</span>
+            </div>
+          </div>
         </div>
 
         <!-- Offer Promotion Banner -->
@@ -154,15 +223,15 @@
           <div class="promo-offer-text">
             <h3 id="promo-percentage">20% OFF</h3>
             <p id="promo-title">On all Grocery Items</p>
-            <span style="font-size:10px; color:var(--text-muted); text-transform:uppercase; font-weight:700;" id="promo-shop-name">Fresh Mart</span>
+            <span style="font-size:10px; color:var(--text-muted); text-transform:uppercase; font-weight:700;" id="promo-shop-name">Sri Lakshmi Stores</span>
           </div>
           <i class="fa-solid fa-tags" style="font-size:42px; color:#ef4444; opacity:0.8;"></i>
         </div>
 
         <!-- Shop Listing Section -->
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-          <h3 style="font-size:18px; font-weight:700;">Nearby Shops</h3>
-          <span style="font-size:13px; font-weight:600; color:var(--primary-blue); cursor:pointer;" onclick="switchTab('explore')">View All</span>
+          <h3 style="font-size:20px; font-weight:800; color:var(--text-main);">Nearby Shops</h3>
+          <span style="font-size:14px; font-weight:700; color:var(--primary-purple); cursor:pointer;" onclick="switchTab('explore')">View All</span>
         </div>
 
         <div class="card-grid" id="home-shops-box">
@@ -177,6 +246,15 @@
         <div class="search-bar-wrapper" style="margin-bottom:12px;">
           <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
           <input type="text" class="search-bar-input" id="explore-search-input" placeholder="What are you looking for?" oninput="handleSearchFilter()">
+        </div>
+
+        <!-- Smart Quick Filter Pills -->
+        <div class="smart-filters-row" id="explore-filter-pills">
+          <button type="button" class="filter-pill active" onclick="toggleQuickFilter('all', this)">⚡ All Items</button>
+          <button type="button" class="filter-pill" onclick="toggleQuickFilter('open', this)">🟢 Open Now</button>
+          <button type="button" class="filter-pill" onclick="toggleQuickFilter('offer', this)">🏷️ Active Offers</button>
+          <button type="button" class="filter-pill" onclick="toggleQuickFilter('top-rated', this)">⭐ 4+ Rating</button>
+          <button type="button" class="filter-pill" onclick="toggleQuickFilter('under-500', this)">💰 Under ₹500</button>
         </div>
 
         <!-- Interactive Filters Row -->
@@ -195,8 +273,23 @@
           </div>
         </div>
 
-        <div class="card-grid" id="explore-products-box" style="gap:12px;">
-          <!-- Populated dynamically -->
+        <div id="explore-shops-section" style="margin-bottom:24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h3 id="explore-shops-title" style="font-size:18px; font-weight:800;">All Shops</h3>
+            <span id="explore-category-label" style="font-size:12px; color:var(--primary-blue); font-weight:700;"></span>
+          </div>
+          <div class="card-grid" id="explore-shops-box" style="gap:12px;">
+            <!-- Shops populated dynamically -->
+          </div>
+        </div>
+
+        <div id="explore-products-section">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h3 style="font-size:18px; font-weight:800;">Products</h3>
+          </div>
+          <div class="card-grid" id="explore-products-box" style="gap:12px;">
+            <!-- Products populated dynamically -->
+          </div>
         </div>
       </div>
 
@@ -243,119 +336,123 @@
         </div>
       </div>
 
-      <!-- 7. SHOP DETAILS PROFILE -->
-      <div id="screen-shop-detail" class="screen-view" style="padding:0;">
-        <button class="btn-back-header" onclick="closeShopDetails()">
-          <i class="fa-solid fa-arrow-left"></i> Back to Shops Listing
-        </button>
-
-        <div class="shop-hero-banner" id="shop-detail-banner" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600');">
-          <div class="shop-hero-overlay"></div>
-          <div class="back-btn-circle" onclick="closeShopDetails()"><i class="fa-solid fa-arrow-left"></i></div>
-        </div>
-
-        <div class="detail-shop-info">
-          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-            <h2 class="detail-shop-title" id="shop-detail-name">Fresh Mart</h2>
-            <div id="shop-detail-status-badge" class="card-status-badge open" style="margin-top:8px;">Open</div>
-          </div>
-          
-          <div style="display:flex; align-items:center; gap:8px; font-size:14px; color:var(--text-muted); margin-top:4px;">
-            <span class="shop-card-category" id="shop-detail-category">Grocery</span>
-            <span>•</span>
-            <span id="shop-detail-rating" style="color:var(--accent-orange); font-weight:700;"><i class="fa-solid fa-star"></i> 4.7</span>
-          </div>
-          
-          <div class="detail-actions-row">
-            <div class="action-circle-btn" onclick="callShop()">
-              <i class="fa-solid fa-phone"></i>
-              <span>Call Shop</span>
+      <!-- 7. CUSTOMER SHOP VIEW -->
+      <div id="screen-shop-detail" class="screen-view customer-shop-view">
+        <div class="customer-shop-page">
+          <div class="customer-shop-hero" id="shop-detail-banner">
+            <div class="customer-shop-hero-actions">
+              <button class="shop-round-btn" onclick="closeShopDetails()" aria-label="Back"><i class="fa-solid fa-arrow-left"></i></button>
+              <div class="shop-round-actions">
+                <button class="shop-round-btn" onclick="toggleFavoriteShop()" aria-label="Save shop"><i class="fa-regular fa-heart" id="shop-detail-fav-icon"></i></button>
+                <button class="shop-round-btn" onclick="shareShop()" aria-label="Share shop"><i class="fa-solid fa-share-nodes"></i></button>
+              </div>
             </div>
-            <div class="action-circle-btn" onclick="copyShopNumber()">
-              <i class="fa-solid fa-copy"></i>
-              <span>Copy Number</span>
-            </div>
-            <div class="action-circle-btn" onclick="toggleFavoriteShop()">
-              <i class="fa-solid fa-heart" id="shop-detail-fav-icon"></i>
-              <span>Favorite</span>
-            </div>
+            <div class="shop-hero-status" id="shop-detail-status-badge"><span></span> OPEN</div>
           </div>
 
-          <!-- Active Offer inside Details -->
-          <div class="promo-offer-banner" id="shop-detail-offer-banner" style="margin-bottom:20px; border-color:rgba(239, 68, 68, 0.2); background:rgba(239, 68, 68, 0.05); display:none;">
-            <div class="promo-offer-text">
-              <h3 id="shop-detail-offer-percent" style="font-size:18px;">20% OFF</h3>
-              <p id="shop-detail-offer-title" style="font-size:12px;">Valid till 31 Aug 2026</p>
-            </div>
-            <i class="fa-solid fa-gift" style="color:#ef4444; font-size:32px;"></i>
-          </div>
-
-          <!-- Detail Tabs Nav -->
-          <div class="detail-tabs">
-            <div class="detail-tab-item active" id="detail-tab-products" onclick="switchDetailTab('products')">Products</div>
-            <div class="detail-tab-item" id="detail-tab-about" onclick="switchDetailTab('about')">About</div>
-            <div class="detail-tab-item" id="detail-tab-reviews" onclick="switchDetailTab('reviews')">Reviews</div>
-          </div>
-
-          <!-- TAB CONTENT: PRODUCTS -->
-          <div id="detail-content-products" class="tab-detail-content">
-            <div class="search-bar-wrapper" style="margin-bottom:16px;">
-              <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
-              <input type="text" class="search-bar-input" id="shop-product-search" placeholder="Search products in store..." oninput="filterShopProducts()">
-            </div>
-            <div class="card-grid" id="detail-products-list" style="gap:12px;">
-              <!-- Product rows list populated dynamically -->
-            </div>
-          </div>
-
-          <!-- TAB CONTENT: ABOUT -->
-          <div id="detail-content-about" class="tab-detail-content" style="display:none; line-height:1.6; color:var(--text-muted); font-size:14px; background:var(--bg-card); padding:24px; border-radius:24px; border:1px solid var(--border-color);">
-            <div style="margin-bottom:16px;">
-              <h4 style="color:var(--text-main); margin-bottom:6px; font-size:15px;">Description</h4>
-              <p id="shop-detail-desc"></p>
-            </div>
-            <div style="margin-bottom:16px;">
-              <h4 style="color:var(--text-main); margin-bottom:6px; font-size:15px;">Address</h4>
-              <p id="shop-detail-address"></p>
-            </div>
-            <div style="margin-bottom:16px;">
-              <h4 style="color:var(--text-main); margin-bottom:6px; font-size:15px;">Shop Timings</h4>
-              <p id="shop-detail-timings"></p>
-            </div>
-          </div>
-
-          <!-- TAB CONTENT: REVIEWS -->
-          <div id="detail-content-reviews" class="tab-detail-content" style="display:none;">
-            <!-- Write a review form -->
-            <div class="glass-shop-card" style="padding:20px; flex-direction:column; margin-bottom:20px; border-radius:20px;">
-              <h4 style="font-size:14px; font-weight:800; text-transform:uppercase; color:var(--primary-blue); margin-bottom:12px;">Write a Review</h4>
-              <form id="review-form" onsubmit="submitShopReview(event)">
-                <div class="form-group" style="margin-bottom:12px;">
-                  <label>Select Rating</label>
-                  <div style="display:flex; gap:12px; font-size:24px; color:var(--accent-orange); margin-top:4px;">
-                    <i class="fa-regular fa-star star-rate" onclick="setReviewRating(1)" style="cursor:pointer;"></i>
-                    <i class="fa-regular fa-star star-rate" onclick="setReviewRating(2)" style="cursor:pointer;"></i>
-                    <i class="fa-regular fa-star star-rate" onclick="setReviewRating(3)" style="cursor:pointer;"></i>
-                    <i class="fa-regular fa-star star-rate" onclick="setReviewRating(4)" style="cursor:pointer;"></i>
-                    <i class="fa-regular fa-star star-rate" onclick="setReviewRating(5)" style="cursor:pointer;"></i>
-                  </div>
+          <main class="customer-shop-content">
+            <section class="shop-profile-head">
+              <img id="shop-detail-profile-photo" class="shop-profile-photo" src="" alt="Shop" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%237c3aed\' stroke-width=\'1.5\'><path d=\'m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\'/><polyline points=\'9 22 9 12 15 12 15 22\'/></svg>';">
+              <div class="shop-profile-main">
+                <div class="shop-title-line">
+                  <h1 id="shop-detail-name">Fresh Mart</h1>
+                  <span class="shop-rating-pill" id="shop-detail-rating"><i class="fa-solid fa-star"></i> 4.7</span>
                 </div>
-                <div class="form-group" style="margin-bottom:12px;">
-                  <textarea id="review-text-input" class="form-control" rows="3" placeholder="Write your review here..." required style="padding:12px; border-radius:12px; font-size:14px;"></textarea>
-                </div>
-                <button type="submit" class="btn-block btn-theme" style="padding:12px; border-radius:12px; font-size:14px;">Submit Review</button>
-              </form>
-            </div>
+                <div class="shop-category-text" id="shop-detail-category">Grocery Store</div>
+                <div class="shop-meta-line"><i class="fa-solid fa-location-dot"></i><span id="shop-detail-address">Koramangala, Bengaluru, Karnataka 560034</span></div>
+                <div class="shop-meta-line"><i class="fa-regular fa-clock"></i><span id="shop-detail-timings">07:00 AM - 10:00 PM</span></div>
+              </div>
+            </section>
 
-            <div class="card-grid" id="detail-reviews-list">
-              <!-- Reviews populated dynamically -->
-            </div>
-          </div>
+            <section class="shop-offer-card" id="shop-detail-offer-banner">
+              <div class="shop-offer-icon"><i class="fa-solid fa-percent"></i></div>
+              <div class="shop-offer-copy">
+                <strong id="shop-detail-offer-percent">20% OFF</strong>
+                <span id="shop-detail-offer-title">On all grocery items</span>
+              </div>
+              <span class="shop-offer-valid" id="shop-detail-offer-valid">Active offer</span>
+            </section>
+
+            <section class="shop-section shop-about-section">
+              <div class="shop-section-title-row"><h2>About Shop</h2><button id="shop-about-toggle" onclick="toggleShopAbout()">Read more</button></div>
+              <p id="shop-detail-desc" class="shop-about-text">No description listed.</p>
+            </section>
+
+            <section class="shop-section">
+              <div class="shop-section-title-row"><h2>Available Products</h2><button onclick="switchDetailTab('products')">View All</button></div>
+              
+              <!-- Search bar inside Shop details -->
+              <div class="search-bar-wrapper" style="margin-bottom:16px;">
+                <i class="fa-solid fa-magnifying-glass search-bar-icon" style="color:var(--primary-purple);"></i>
+                <input type="text" class="search-bar-input" id="shop-detail-search-input" placeholder="🔍 Search products" oninput="filterShopProducts()">
+              </div>
+
+              <div class="card-grid" id="detail-products-list"></div>
+            </section>
+
+            <section class="shop-section">
+              <div class="shop-section-title-row"><h2>Shop Photos</h2><button onclick="showAllShopPhotos()">View All</button></div>
+              <div class="shop-photo-grid" id="shop-detail-photo-gallery"></div>
+            </section>
+
+            <section class="shop-section shop-reviews-section">
+              <div class="shop-review-summary">
+                <h2>Customer Reviews</h2>
+                <div class="shop-review-score"><strong id="shop-review-score">4.7</strong><div><div id="shop-review-stars" class="review-stars"></div><span id="shop-review-count">0 Reviews</span></div></div>
+              </div>
+              <div class="shop-review-list" id="detail-reviews-list"></div>
+              <button class="shop-write-review" onclick="openReviewComposer()"><i class="fa-solid fa-pen"></i> Write a Review</button>
+            </section>
+          </main>
         </div>
       </div>
 
-    </div>
+  <!-- CUSTOMER REVIEW MODAL -->
+  <div class="modal-overlay" id="customer-review-modal" style="display:none;">
+    <div class="modal-card customer-review-modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Write a Review</h3>
+          <p style="font-size:12px; color:var(--text-muted); margin-top:2px;">Share your experience with this shop</p>
+        </div>
+        <span class="modal-close-btn" onclick="closeReviewComposer()">&times;</span>
+      </div>
+      <form onsubmit="submitShopReview(event)">
+        <div style="margin-bottom:14px;">
+          <label style="font-weight:700; font-size:13px; color:var(--text-main); display:block; text-align:center; margin-bottom:8px;">Your Rating</label>
+          
+          <div class="customer-review-stars-input">
+            <i class="fa-regular fa-star modal-star-rate" onclick="setReviewRating(1)"></i>
+            <i class="fa-regular fa-star modal-star-rate" onclick="setReviewRating(2)"></i>
+            <i class="fa-regular fa-star modal-star-rate" onclick="setReviewRating(3)"></i>
+            <i class="fa-regular fa-star modal-star-rate" onclick="setReviewRating(4)"></i>
+            <i class="fa-regular fa-star modal-star-rate" onclick="setReviewRating(5)"></i>
+          </div>
 
+          <div id="selected-rating-label" class="selected-rating-label">Tap a star to rate</div>
+        </div>
+
+        <div class="form-group">
+          <label for="review-text-input" style="font-weight:700; font-size:13px; margin-bottom:6px; display:block;">Your Feedback</label>
+          <textarea id="review-text-input" class="form-control" rows="4" placeholder="Write your review about products, prices, or store service..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-block btn-theme" style="margin-top:16px;">Submit Review</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- GUEST AUTH REQUIRED MODAL -->
+  <div class="modal-overlay" id="guest-auth-modal" style="display:none;">
+    <div class="modal-card" style="max-width:400px; text-align:center; padding:28px;">
+      <div style="width:64px; height:64px; border-radius:50%; background:rgba(124,58,237,0.1); display:flex; align-items:center; justify-content:center; margin:0 auto 16px auto;">
+        <i class="fa-solid fa-user-lock" style="font-size:28px; color:var(--primary-purple);"></i>
+      </div>
+      <h3 style="font-size:20px; font-weight:800; color:var(--text-main); margin-bottom:8px;">Account Required</h3>
+      <p style="font-size:14px; color:var(--text-muted); margin-bottom:24px;" id="guest-modal-msg">Please log in or create an account to write reviews and place orders.</p>
+      <button class="btn-block btn-theme" onclick="closeGuestAuthModal(); goToCustomerAuth();" style="margin-bottom:12px;">Log In / Register</button>
+      <button class="btn-block" style="background:var(--border-color); color:var(--text-main);" onclick="closeGuestAuthModal()">Continue Browsing</button>
+    </div>
   </div>
 
   <!-- MODAL: PRODUCT DETAILS POPUP -->
@@ -366,21 +463,21 @@
         <span class="modal-close-btn" onclick="closeProductDetailModal()">&times;</span>
       </div>
       <div style="display:flex; flex-direction:column; gap:16px; align-items:center; text-align:center;">
-        <img id="prod-detail-modal-img" src="" style="width:100%; height:180px; object-fit:cover; border-radius:18px; background:#1e293b;">
+        <img id="prod-detail-modal-img" src="" style="width:100%; height:180px; object-fit:cover; border-radius:18px; background:#f1f5f9;">
         
         <div style="text-align:left; width:100%;">
           <h4 id="prod-detail-modal-title" style="font-size:20px; font-weight:800; margin-bottom:4px;">Milk</h4>
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <span id="prod-detail-modal-category" style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--primary-blue);">Dairy</span>
+            <span id="prod-detail-modal-category" style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--primary-purple);">Dairy</span>
             <span id="prod-detail-modal-price" style="font-size:18px; font-weight:800; color:var(--text-main);">₹30.00</span>
           </div>
           
           <!-- Shop Link inside Product Pop-up -->
-          <div class="glass-shop-card" id="prod-detail-shop-link" style="padding:12px; align-items:center; border-radius:14px; margin-bottom:12px; cursor:pointer; border-color:var(--primary-blue-glow);">
-            <i class="fa-solid fa-store" style="color:var(--primary-blue); font-size:16px;"></i>
+          <div class="glass-shop-card" id="prod-detail-shop-link" style="padding:12px; align-items:center; border-radius:14px; margin-bottom:12px; cursor:pointer;">
+            <i class="fa-solid fa-store" style="color:var(--primary-purple); font-size:16px;"></i>
             <div style="margin-left:12px;">
               <div style="font-size:10px; color:var(--text-muted);">Available at Store</div>
-              <strong id="prod-detail-modal-shop-name" style="font-size:13px;">Fresh Mart</strong>
+              <strong id="prod-detail-modal-shop-name" style="font-size:13px;">Sri Lakshmi Stores</strong>
             </div>
             <i class="fa-solid fa-chevron-right" style="margin-left:auto; font-size:11px; color:var(--text-muted);"></i>
           </div>
@@ -389,7 +486,7 @@
             <label style="font-size:11px;">Stock Availability</label>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
               <span id="prod-detail-modal-stock-lbl" style="font-weight:700; font-size:14px;">30 Litres</span>
-              <span id="prod-detail-modal-status-badge" class="card-status-badge open">Available</span>
+              <span id="prod-detail-modal-status-badge" class="card-status-badge open">🟢 Available</span>
             </div>
           </div>
 
@@ -432,6 +529,137 @@
         </div>
         <button type="submit" class="btn-block btn-theme" style="margin-top:10px;">Save Profile Changes</button>
       </form>
+    </div>
+  </div>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="sv-bottom-nav" id="app-bottom-nav" style="display:none;">
+    <div class="sv-bottom-nav-item active" id="bnav-home" onclick="switchTab('home')">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </div>
+    <div class="sv-bottom-nav-item" id="bnav-explore" onclick="switchTab('explore')">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span>Search</span>
+    </div>
+    <div class="sv-bottom-nav-item" id="bnav-favorites" onclick="switchTab('favorites')">
+      <i class="fa-solid fa-heart"></i>
+      <span>Favorites</span>
+    </div>
+    <div class="sv-bottom-nav-item" id="bnav-emergency" onclick="filterEmergencyItem('')">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span>Emergency</span>
+    </div>
+    <div class="sv-bottom-nav-item" id="bnav-profile" onclick="switchTab('profile')">
+      <i class="fa-solid fa-user"></i>
+      <span>Profile</span>
+    </div>
+  </nav>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toast-container"></div>
+
+  <!-- FLOATING CART BUTTON -->
+  <button class="floating-cart-btn" id="floating-cart-btn" onclick="openCartDrawer()" style="display:none;" aria-label="Cart">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span class="cart-count-badge" id="cart-badge-count">0</span>
+  </button>
+
+  <!-- CART DRAWER OVERLAY -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay" onclick="if(event.target===this) closeCartDrawer()">
+    <div class="cart-drawer">
+      <div class="cart-drawer-header">
+        <div>
+          <h3 style="font-size:18px; font-weight:800; color:var(--text-main);">Your Cart 🛒</h3>
+          <p style="font-size:12px; color:var(--text-muted);" id="cart-shop-name-lbl">From Local Store</p>
+        </div>
+        <span class="modal-close-btn" onclick="closeCartDrawer()">&times;</span>
+      </div>
+
+      <div class="cart-drawer-body" id="cart-items-container">
+        <!-- Populated dynamically -->
+      </div>
+
+      <div class="cart-drawer-footer" id="cart-footer-box">
+        <!-- Summary & Checkout trigger -->
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal-overlay" id="checkout-modal" style="display:none;">
+    <div class="modal-card" style="max-width:480px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Checkout Order 🛍️</h3>
+        <span class="modal-close-btn" onclick="closeCheckoutModal()">&times;</span>
+      </div>
+      <form onsubmit="handlePlaceOrder(event)">
+        <div class="form-group">
+          <label for="checkout-order-type" style="font-weight:700; font-size:13px; margin-bottom:4px; display:block;">Order Type</label>
+          <select id="checkout-order-type" class="form-control" onchange="toggleDeliveryAddressField(this.value)">
+            <option value="Delivery">📍 Home Delivery</option>
+            <option value="Pickup">🏪 Store Pickup</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="delivery-address-group">
+          <label for="checkout-address" style="font-weight:700; font-size:13px; margin-bottom:4px; display:block;">Delivery Address</label>
+          <input type="text" id="checkout-address" class="form-control" required placeholder="Enter house no, street, locality...">
+        </div>
+
+        <div class="form-group">
+          <label for="checkout-payment-method" style="font-weight:700; font-size:13px; margin-bottom:4px; display:block;">Payment Method</label>
+          <select id="checkout-payment-method" class="form-control">
+            <option value="Cash / Pay on Delivery">💵 Cash / Pay on Delivery</option>
+            <option value="UPI Pay on Delivery">📱 UPI Pay on Delivery / Pickup</option>
+          </select>
+        </div>
+
+        <div style="background:#f8fafc; padding:14px; border-radius:16px; margin:16px 0; border:1px solid var(--border-color);">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px; color:var(--text-muted);">
+            <span>Subtotal</span>
+            <strong id="chk-subtotal">₹0.00</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px; color:#10b981;">
+            <span>Shop Discount</span>
+            <strong id="chk-discount">-₹0.00</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:16px; font-weight:800; color:var(--text-main); border-top:1px solid var(--border-color); padding-top:8px; margin-top:6px;">
+            <span>Total Amount</span>
+            <strong id="chk-final" style="color:var(--primary-purple);">₹0.00</strong>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-block btn-theme">Confirm & Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ORDER TRACKING / RECEIPT MODAL -->
+  <div class="modal-overlay" id="order-tracking-modal" style="display:none;">
+    <div class="modal-card" style="max-width:480px; text-align:center;">
+      <div style="width:70px; height:70px; border-radius:50%; background:rgba(16,185,129,0.12); color:#10b981; display:flex; align-items:center; justify-content:center; margin:0 auto 16px auto; font-size:32px;">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <h3 style="font-size:22px; font-weight:900; margin-bottom:4px;">Order Placed! 🎉</h3>
+      <p style="color:var(--text-muted); font-size:13px; margin-bottom:16px;" id="track-order-id-lbl">Order ID: #...</p>
+
+      <div style="background:#f8fafc; padding:16px; border-radius:18px; border:1px solid var(--border-color); text-align:left; margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:13px;">
+          <span style="color:var(--text-muted);">Shop:</span>
+          <strong id="track-shop-name">Fresh Mart</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:13px;">
+          <span style="color:var(--text-muted);">Status:</span>
+          <span class="card-status-badge open" id="track-order-status">🟢 Pending Acceptance</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:800; border-top:1px dashed var(--border-color); padding-top:8px; margin-top:8px;">
+          <span>Total Paid:</span>
+          <strong id="track-total-amount" style="color:var(--primary-purple);">₹0.00</strong>
+        </div>
+      </div>
+
+      <button class="btn-block btn-theme" onclick="closeOrderTrackingModal()">Done</button>
     </div>
   </div>
 

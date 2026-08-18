@@ -134,6 +134,7 @@ app.post('/api/auth/owner/register', async (req, res) => {
       description: '',
       contact_number: contact_number || mobile,
       shop_photo: shop_photo || '',
+      shop_photos: [],
       opening_time: opening_time || '08:00 AM',
       closing_time: closing_time || '09:00 PM',
       shop_status: 'Closed' // starts closed
@@ -222,7 +223,7 @@ app.get('/api/owner/shop', authenticateToken, async (req, res) => {
 // 2. Update Shop Details (Photo, timings, profile)
 app.put('/api/owner/shop', authenticateToken, async (req, res) => {
   if (req.userRole !== 'owner') return res.status(403).json({ message: 'Unauthorized.' });
-  const { shop_name, category, description, address, contact_number, shop_photo, opening_time, closing_time, shop_status } = req.body;
+  const { shop_name, category, description, address, contact_number, shop_photo, shop_photos, opening_time, closing_time, shop_status } = req.body;
   try {
     const updateData = {};
     if (shop_name) updateData.shop_name = shop_name;
@@ -230,7 +231,8 @@ app.put('/api/owner/shop', authenticateToken, async (req, res) => {
     if (description !== undefined) updateData.description = description;
     if (address) updateData.address = address;
     if (contact_number) updateData.contact_number = contact_number;
-    if (shop_photo) updateData.shop_photo = shop_photo;
+    if (shop_photo !== undefined) updateData.shop_photo = shop_photo;
+    if (Array.isArray(shop_photos)) updateData.shop_photos = shop_photos;
     if (opening_time) updateData.opening_time = opening_time;
     if (closing_time) updateData.closing_time = closing_time;
     if (shop_status) updateData.shop_status = shop_status;
@@ -553,13 +555,132 @@ app.post('/api/customer/shops/:id/reviews', authenticateToken, async (req, res) 
   }
 });
 
+// 4. Customer Place Order
+app.post('/api/customer/orders', authenticateToken, async (req, res) => {
+  if (req.userRole !== 'customer') return res.status(403).json({ message: 'Only logged-in customers can place orders.' });
+  const { shop_id, items, order_type, delivery_address, payment_method } = req.body;
+
+  if (!shop_id || !Array.isArray(items) || items.length === 0) {
+    return res.status(400).json({ message: 'Cart items and shop details are required.' });
+  }
+
+  try {
+    const shop = await db.shops.findOne({ _id: shop_id });
+    if (!shop) return res.status(404).json({ message: 'Shop not found.' });
+
+    let subtotal = 0;
+    const orderItems = [];
+
+    for (const item of items) {
+      const prod = await db.products.findOne({ _id: item.product_id });
+      if (prod) {
+        const itemPrice = prod.price || item.price || 0;
+        const qty = item.quantity || 1;
+        subtotal += itemPrice * qty;
+
+        orderItems.push({
+          product_id: String(prod._id),
+          product_name: prod.product_name,
+          price: itemPrice,
+          quantity: qty,
+          unit: item.unit || 'Piece',
+          image: prod.image || ''
+        });
+
+        // Deduct available quantity in stock
+        const stk = await db.stocks.findOne({ product_id: prod._id });
+        if (stk) {
+          const newQty = Math.max(0, (stk.available_quantity || 0) - qty);
+          await db.stocks.updateOne({ _id: stk._id }, { available_quantity: newQty, last_updated: new Date() });
+        }
+      }
+    }
+
+    // Apply active shop discount if present
+    const activeDiscount = await db.discounts.findOne({ shop_id: shop._id });
+    let discountAmount = 0;
+    if (activeDiscount && activeDiscount.percentage > 0) {
+      discountAmount = Math.round((subtotal * activeDiscount.percentage) / 100);
+    }
+
+    const totalAmount = Math.max(0, subtotal - discountAmount);
+
+    const newOrder = await db.orders.create({
+      customer_id: String(req.user._id),
+      customer_name: req.user.name,
+      customer_mobile: req.user.mobile,
+      shop_id: String(shop._id),
+      shop_name: shop.shop_name,
+      items: orderItems,
+      subtotal,
+      discount_amount: discountAmount,
+      total_amount: totalAmount,
+      order_type: order_type || 'Delivery',
+      delivery_address: delivery_address || shop.address,
+      payment_method: payment_method || 'Cash on Delivery',
+      order_status: 'Pending',
+      created_at: new Date()
+    });
+
+    res.status(201).json(newOrder);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to place order.' });
+  }
+});
+
+// 5. Get Customer Orders History
+app.get('/api/customer/orders', authenticateToken, async (req, res) => {
+  if (req.userRole !== 'customer') return res.status(403).json({ message: 'Unauthorized.' });
+  try {
+    const orders = await db.orders.find({ customer_id: String(req.user._id) });
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ message: 'Error loading order history.' });
+  }
+});
+
+// 6. Get Shop Owner Orders
+app.get('/api/owner/orders', authenticateToken, async (req, res) => {
+  if (req.userRole !== 'owner') return res.status(403).json({ message: 'Unauthorized.' });
+  try {
+    const orders = await db.orders.find({ shop_id: String(req.user.shop_id) });
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ message: 'Error loading shop orders.' });
+  }
+});
+
+// 7. Update Order Status (Owner action)
+app.put('/api/owner/orders/:id/status', authenticateToken, async (req, res) => {
+  if (req.userRole !== 'owner') return res.status(403).json({ message: 'Unauthorized.' });
+  const { status } = req.body;
+  const validStatuses = ['Pending', 'Accepted', 'Preparing', 'Ready', 'Completed', 'Cancelled'];
+  if (!validStatuses.includes(status)) {
+    return res.status(400).json({ message: 'Invalid order status.' });
+  }
+
+  try {
+    await db.orders.updateOne({ _id: req.params.id }, { order_status: status });
+    const updated = await db.orders.findOne({ _id: req.params.id });
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to update order status.' });
+  }
+});
+
 
 // Start server and connect DB
 const startServer = async () => {
-  await db.connectDB();
-  app.listen(PORT, () => {
-    console.log(`Smart Shop Hub running on port ${PORT}`);
-  });
+  try {
+    await db.connectDB();
+    app.listen(PORT, () => {
+      console.log(`Smart Shop Hub running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error('Server startup failed:', err.message || err);
+    process.exit(1);
+  }
 };
 
 startServer();
